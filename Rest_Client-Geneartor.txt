@@ -1,0 +1,29 @@
+# Instrucciones para crear cliente REST a partir de una especificación OpenAPI, utilizando swagger-codegen.
+# Como ejemplo, se creará un cliente para al API REST de Power BI en Java.
+# Info obtenida desde aquí: http://www.baeldung.com/spring-boot-rest-client-swagger-codegen
+
+#
+# Antecedentes:
+# 
+# Descriptor de la API REST de Power BI: https://raw.githubusercontent.com/Microsoft/PowerBI-CSharp/master/sdk/swaggers/swaggerV2.json
+# (A la fecha 2018-04-08, el descriptor en GitHub está con problemas, por lo que se utiliza una versión local de swaggerV2.json para la generación del código)
+#
+# Lenguaje: Java
+# Librería base del cliente: Spring RestTemplate + Jackson (rest-template), para que sea compatible con un entorno Spring Boot
+
+# Instalar swagger-codegen:
+#brew install swagger-codegen
+
+
+swagger-codegen generate \
+  -i https://raw.githubusercontent.com/Microsoft/PowerBI-CSharp/master/sdk/swaggers/swaggerV2.json \
+  --api-package cl.cc.powerbi.client \
+  --model-package cl.cc.powerbi.client.model \
+  --invoker-package cl.cc.powerbi.client.invoker \
+  --group-id cl.cc.powerbi \
+  --artifact-id powerbi-sdk \
+  --artifact-version 1.0.0 \
+  -l java \
+  --library resttemplate \
+  -o powerbi-sdk
+
