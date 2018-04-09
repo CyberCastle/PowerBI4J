@@ -26,6 +26,7 @@ import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
@@ -53,6 +54,7 @@ public abstract class BaseApiAbstract {
     public BaseApiAbstract(String accessToken) {
         this.accessToken = accessToken;
         this.restTemplate = new RestTemplate();
+        this.restTemplate.getMessageConverters().add(new ResourceHttpMessageConverter());
 
         // This allows us to read the response more than once - Necessary for debugging.
         restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(restTemplate.getRequestFactory()));

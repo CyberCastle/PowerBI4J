@@ -1,9 +1,7 @@
 package cl.cc.powerbi.api;
 
-
 import cl.cc.powerbi.api.model.CloneReportRequest;
 import cl.cc.powerbi.api.model.EmbedToken;
-import java.io.File;
 import cl.cc.powerbi.api.model.GenerateTokenRequest;
 import cl.cc.powerbi.api.model.ODataResponseListReport;
 import cl.cc.powerbi.api.model.RebindReportRequest;
@@ -12,12 +10,13 @@ import cl.cc.powerbi.api.model.UpdateReportContentRequest;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.http.MediaType;
 
 /**
  *
@@ -174,11 +173,11 @@ public class ReportsApi extends BaseApiAbstract {
      * <b>200</b> - Exported File
      *
      * @param reportKey The report id
-     * @return File
+     * @return ByteArrayResource
      * @throws RestClientException if an error occurs while attempting to invoke
      * the API
      */
-    public File exportReport(String reportKey) throws RestClientException {
+    public ByteArrayResource exportReport(String reportKey) throws RestClientException {
 
         // Verify the required parameter 'reportKey' is set
         if (reportKey == null) {
@@ -194,7 +193,7 @@ public class ReportsApi extends BaseApiAbstract {
             MediaType.parseMediaType("application/zip")
         };
 
-        ParameterizedTypeReference<File> returnType = new ParameterizedTypeReference<File>() {
+        ParameterizedTypeReference<ByteArrayResource> returnType = new ParameterizedTypeReference<ByteArrayResource>() {
         };
         return this.invokeAPI(path, HttpMethod.GET, null, null, accepts, null, returnType);
     }
@@ -207,11 +206,11 @@ public class ReportsApi extends BaseApiAbstract {
      *
      * @param groupId The group id
      * @param reportKey The report id
-     * @return File
+     * @return ByteArrayResource
      * @throws RestClientException if an error occurs while attempting to invoke
      * the API
      */
-    public File exportReportInGroup(String groupId, String reportKey) throws RestClientException {
+    public ByteArrayResource exportReportInGroup(String groupId, String reportKey) throws RestClientException {
 
         // Verify the required parameter 'groupId' is set
         if (groupId == null) {
@@ -233,7 +232,7 @@ public class ReportsApi extends BaseApiAbstract {
             MediaType.parseMediaType("application/zip")
         };
 
-        ParameterizedTypeReference<File> returnType = new ParameterizedTypeReference<File>() {
+        ParameterizedTypeReference<ByteArrayResource> returnType = new ParameterizedTypeReference<ByteArrayResource>() {
         };
         return this.invokeAPI(path, HttpMethod.GET, null, null, accepts, null, returnType);
     }
