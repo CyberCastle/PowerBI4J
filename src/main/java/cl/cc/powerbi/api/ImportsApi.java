@@ -2,7 +2,7 @@ package cl.cc.powerbi.api;
 
 
 import cl.cc.powerbi.api.model.ImportInfo;
-import cl.cc.powerbi.api.model.ModelImport;
+import cl.cc.powerbi.api.model.Imports;
 import cl.cc.powerbi.api.model.ODataResponseListImport;
 import cl.cc.powerbi.api.model.TemporaryUploadLocation;
 import org.springframework.web.client.RestClientException;
@@ -79,11 +79,11 @@ public class ImportsApi extends BaseApiAbstract {
      * <b>200</b> - OK
      *
      * @param importId The import id
-     * @return ModelImport
+     * @return Imports
      * @throws RestClientException if an error occurs while attempting to invoke
      * the API
      */
-    public ModelImport getImportById(String importId) throws RestClientException {
+    public Imports getImportById(String importId) throws RestClientException {
 
         // Verify the required parameter 'importId' is set
         if (importId == null) {
@@ -95,7 +95,7 @@ public class ImportsApi extends BaseApiAbstract {
         uriVariables.put("importId", importId);
         String path = UriComponentsBuilder.fromPath("/v1.0/myorg/imports/{importId}").buildAndExpand(uriVariables).toUriString();
 
-        ParameterizedTypeReference<ModelImport> returnType = new ParameterizedTypeReference<ModelImport>() {
+        ParameterizedTypeReference<Imports> returnType = new ParameterizedTypeReference<Imports>() {
         };
         return this.invokeAPI(path, HttpMethod.GET, null, null, defaultAccepts, null, returnType);
     }
@@ -108,11 +108,11 @@ public class ImportsApi extends BaseApiAbstract {
      *
      * @param groupId The group id
      * @param importId The import id
-     * @return ModelImport
+     * @return Imports
      * @throws RestClientException if an error occurs while attempting to invoke
      * the API
      */
-    public ModelImport getImportByIdInGroup(String groupId, String importId) throws RestClientException {
+    public Imports getImportByIdInGroup(String groupId, String importId) throws RestClientException {
 
         // Verify the required parameter 'groupId' is set
         if (groupId == null) {
@@ -130,7 +130,7 @@ public class ImportsApi extends BaseApiAbstract {
         uriVariables.put("importId", importId);
         String path = UriComponentsBuilder.fromPath("/v1.0/myorg/groups/{groupId}/imports/{importId}").buildAndExpand(uriVariables).toUriString();
 
-        ParameterizedTypeReference<ModelImport> returnType = new ParameterizedTypeReference<ModelImport>() {
+        ParameterizedTypeReference<Imports> returnType = new ParameterizedTypeReference<Imports>() {
         };
         return this.invokeAPI(path, HttpMethod.GET, null, null, defaultAccepts, null, returnType);
     }
@@ -193,11 +193,11 @@ public class ImportsApi extends BaseApiAbstract {
      * @param importInfo The import to post
      * @param nameConflict Determines what to do if a dataset with the same name
      * already exists
-     * @return ModelImport
+     * @return Imports
      * @throws RestClientException if an error occurs while attempting to invoke
      * the API
      */
-    public ModelImport postImport(String datasetDisplayName, ImportInfo importInfo, String nameConflict) throws RestClientException {
+    public Imports imports(String datasetDisplayName, ImportInfo importInfo, String nameConflict) throws RestClientException {
 
         // Verify the required parameter 'datasetDisplayName' is set
         if (datasetDisplayName == null) {
@@ -215,7 +215,7 @@ public class ImportsApi extends BaseApiAbstract {
         queryParams.putAll(this.parameterToMultiValueMap(null, "datasetDisplayName", datasetDisplayName));
         queryParams.putAll(this.parameterToMultiValueMap(null, "nameConflict", nameConflict));
 
-        ParameterizedTypeReference<ModelImport> returnType = new ParameterizedTypeReference<ModelImport>() {
+        ParameterizedTypeReference<Imports> returnType = new ParameterizedTypeReference<Imports>() {
         };
         return this.invokeAPI(path, HttpMethod.POST, queryParams, importInfo, defaultAccepts, defaultContentTypes, returnType);
     }
@@ -233,11 +233,11 @@ public class ImportsApi extends BaseApiAbstract {
      * @param importInfo The import to post
      * @param nameConflict Determines what to do if a dataset with the same name
      * already exists
-     * @return ModelImport
+     * @return Imports
      * @throws RestClientException if an error occurs while attempting to invoke
      * the API
      */
-    public ModelImport postImportInGroup(String groupId, String datasetDisplayName, ImportInfo importInfo, String nameConflict) throws RestClientException {
+    public Imports importsInGroup(String groupId, String datasetDisplayName, ImportInfo importInfo, String nameConflict) throws RestClientException {
 
         // Verify the required parameter 'groupId' is set
         if (groupId == null) {
@@ -263,7 +263,7 @@ public class ImportsApi extends BaseApiAbstract {
         queryParams.putAll(this.parameterToMultiValueMap(null, "datasetDisplayName", datasetDisplayName));
         queryParams.putAll(this.parameterToMultiValueMap(null, "nameConflict", nameConflict));
 
-        ParameterizedTypeReference<ModelImport> returnType = new ParameterizedTypeReference<ModelImport>() {
+        ParameterizedTypeReference<Imports> returnType = new ParameterizedTypeReference<Imports>() {
         };
         return this.invokeAPI(path, HttpMethod.POST, queryParams, importInfo, defaultAccepts, defaultContentTypes, returnType);
     }

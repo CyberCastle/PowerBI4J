@@ -16,7 +16,7 @@ public class ODataResponseListImport {
     private String odataContext = null;
 
     @JsonProperty("value")
-    private List<ModelImport> value = null;
+    private List<Imports> value = null;
 
     public ODataResponseListImport odataContext(String odataContext) {
         this.odataContext = odataContext;
@@ -37,12 +37,12 @@ public class ODataResponseListImport {
         this.odataContext = odataContext;
     }
 
-    public ODataResponseListImport value(List<ModelImport> value) {
+    public ODataResponseListImport value(List<Imports> value) {
         this.value = value;
         return this;
     }
 
-    public ODataResponseListImport addValueItem(ModelImport valueItem) {
+    public ODataResponseListImport addValueItem(Imports valueItem) {
         if (this.value == null) {
             this.value = new ArrayList<>();
         }
@@ -56,11 +56,11 @@ public class ODataResponseListImport {
      * @return value
      *
      */
-    public List<ModelImport> getValue() {
+    public List<Imports> getValue() {
         return value;
     }
 
-    public void setValue(List<ModelImport> value) {
+    public void setValue(List<Imports> value) {
         this.value = value;
     }
 
