@@ -1,15 +1,21 @@
 package cl.cc.powerbi.api.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A dataset table
  *
  * @author CyberCastle
  */
+@JsonPropertyOrder({
+    "name",
+    "columns",
+    "rows"
+})
 public class Table {
 
     @JsonProperty("name")
@@ -20,6 +26,14 @@ public class Table {
 
     @JsonProperty("rows")
     private List<Row> rows = null;
+
+    public Table() {
+
+    }
+
+    public Table(String name) {
+        this.name = name;
+    }
 
     public Table name(String name) {
         this.name = name;
