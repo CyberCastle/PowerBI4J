@@ -1,6 +1,7 @@
 package cl.cc.powerbi.api;
 
 import cl.cc.utils.ISO8601Utils;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +27,9 @@ import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
@@ -54,7 +57,18 @@ public abstract class BaseApiAbstract {
     public BaseApiAbstract(String accessToken) {
         this.accessToken = accessToken;
         this.restTemplate = new RestTemplate();
-        this.restTemplate.getMessageConverters().add(new ResourceHttpMessageConverter());
+
+        List<HttpMessageConverter<?>> converters = this.restTemplate.getMessageConverters();
+        converters
+                .stream()
+                .filter((converter) -> (converter instanceof MappingJackson2HttpMessageConverter))
+                .map((converter) -> ((MappingJackson2HttpMessageConverter) converter)
+                .getObjectMapper())
+                .forEachOrdered((mapper) -> {
+                    mapper.setSerializationInclusion(Include.NON_NULL);
+                });
+
+        converters.add(new ResourceHttpMessageConverter());
 
         // This allows us to read the response more than once - Necessary for debugging.
         restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(restTemplate.getRequestFactory()));
