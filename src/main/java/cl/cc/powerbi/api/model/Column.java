@@ -1,20 +1,70 @@
 package cl.cc.powerbi.api.model;
 
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * A Power BI Column
  *
  * @author CyberCastle
  */
+@JsonPropertyOrder({
+    "name",
+    "dataType"
+})
 public class Column {
 
     @JsonProperty("name")
     private String name = null;
 
     @JsonProperty("dataType")
-    private String dataType = null;
+    private DataType dataType = null;
+
+    public enum DataType {
+        INT64("Int64"),
+        DOUBLE("Double"),
+        BOOLEAN("Boolean"),
+        DATETIME("Datetime"),
+        STRING("String");
+
+        private final String value;
+
+        DataType(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        @JsonCreator
+        public static DataType fromValue(String text) {
+            for (DataType b : DataType.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            return null;
+        }
+    }
+
+    public Column() {
+
+    }
+
+    public Column(String name, DataType dataType) {
+        this.name = name;
+        this.dataType = dataType;
+    }
 
     public Column name(String name) {
         this.name = name;
@@ -35,7 +85,7 @@ public class Column {
         this.name = name;
     }
 
-    public Column dataType(String dataType) {
+    public Column dataType(DataType dataType) {
         this.dataType = dataType;
         return this;
     }
@@ -46,11 +96,11 @@ public class Column {
      * @return dataType
      *
      */
-    public String getDataType() {
+    public DataType getDataType() {
         return dataType;
     }
 
-    public void setDataType(String dataType) {
+    public void setDataType(DataType dataType) {
         this.dataType = dataType;
     }
 
