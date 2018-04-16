@@ -24,6 +24,9 @@ public class Table {
     @JsonProperty("columns")
     private List<Column> columns = new ArrayList<Column>();
 
+    @JsonProperty("measures")
+    private List<Measure> measures = new ArrayList<Measure>();
+
     @JsonProperty("rows")
     private List<Row> rows = null;
 
@@ -78,6 +81,28 @@ public class Table {
         this.columns = columns;
     }
 
+    public Table addMeasuresItem(Measure measuresItem) {
+        if (this.measures == null) {
+            this.measures = new ArrayList<>();
+        }
+        this.measures.add(measuresItem);
+        return this;
+    }
+
+    /**
+     * The measures within this table
+     *
+     * @return measures
+     *
+     */
+    public List<Measure> getMeasures() {
+        return measures;
+    }
+
+    public void setMeasures(List<Measure> measures) {
+        this.measures = measures;
+    }
+
     public Table rows(List<Row> rows) {
         this.rows = rows;
         return this;
@@ -92,7 +117,7 @@ public class Table {
     }
 
     /**
-     * The data rows within this tabe
+     * The data rows within this table
      *
      * @return rows
      *
