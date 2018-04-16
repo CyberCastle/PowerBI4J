@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A Power BI Dataset
+ * A Power BI Dataset. More info here:
+ * https://msdn.microsoft.com/en-us/library/mt742155.aspx
  *
  * @author CyberCastle
  */
