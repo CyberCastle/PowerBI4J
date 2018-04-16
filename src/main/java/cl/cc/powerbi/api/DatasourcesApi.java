@@ -1,6 +1,5 @@
 package cl.cc.powerbi.api;
 
-
 import cl.cc.powerbi.api.model.GatewayDatasource;
 import cl.cc.powerbi.api.model.ODataResponseListGatewayDatasource;
 import cl.cc.powerbi.api.model.ODataResponseListUserAccessRight;

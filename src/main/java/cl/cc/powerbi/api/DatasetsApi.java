@@ -1,6 +1,5 @@
 package cl.cc.powerbi.api;
 
-
 import cl.cc.powerbi.api.model.BindToGatewayRequest;
 import cl.cc.powerbi.api.model.ConnectionDetails;
 import cl.cc.powerbi.api.model.Dataset;

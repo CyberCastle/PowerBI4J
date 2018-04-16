@@ -1,6 +1,5 @@
 package cl.cc.powerbi.api;
 
-
 import cl.cc.powerbi.api.model.AssignToCapacityRequest;
 import cl.cc.powerbi.api.model.Group;
 import cl.cc.powerbi.api.model.GroupCreationRequest;

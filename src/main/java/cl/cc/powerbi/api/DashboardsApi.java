@@ -1,6 +1,5 @@
 package cl.cc.powerbi.api;
 
-
 import cl.cc.powerbi.api.model.AddDashboardRequest;
 import cl.cc.powerbi.api.model.Dashboard;
 import cl.cc.powerbi.api.model.EmbedToken;

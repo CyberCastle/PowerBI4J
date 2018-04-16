@@ -1,6 +1,5 @@
 package cl.cc.powerbi.api;
 
-
 import cl.cc.powerbi.api.model.CloneTileRequest;
 import cl.cc.powerbi.api.model.EmbedToken;
 import cl.cc.powerbi.api.model.GenerateTokenRequest;

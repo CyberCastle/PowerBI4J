@@ -1,6 +1,5 @@
 package cl.cc.powerbi.api;
 
-
 import cl.cc.powerbi.api.model.Gateway;
 import cl.cc.powerbi.api.model.ODataResponseListGateway;
 import org.springframework.web.client.RestClientException;
