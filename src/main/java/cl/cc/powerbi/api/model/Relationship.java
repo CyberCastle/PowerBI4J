@@ -65,6 +65,14 @@ public class Relationship {
     @JsonProperty("toColumn")
     private String toColumn;
 
+    public Relationship() {
+
+    }
+
+    public Relationship(String name) {
+        this.name = name;
+    }
+
     public Relationship name(String name) {
         this.name = name;
         return this;
@@ -176,6 +184,13 @@ public class Relationship {
     }
 
     public void setToColumn(String toColumn) {
+        this.toColumn = toColumn;
+    }
+
+    public void setReferences(String fromTable, String fromColumn, String toTable, String toColumn) {
+        this.fromTable = fromTable;
+        this.fromColumn = fromColumn;
+        this.toTable = toTable;
         this.toColumn = toColumn;
     }
 
