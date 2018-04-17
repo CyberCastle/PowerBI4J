@@ -208,7 +208,7 @@ public class ISO8601Utils {
                 throw new IllegalArgumentException("No time zone indicator");
             }
 
-            TimeZone timezone = null;
+            TimeZone timezone;
             char timezoneIndicator = date.charAt(offset);
 
             switch (timezoneIndicator) {

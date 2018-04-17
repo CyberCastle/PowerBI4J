@@ -12,10 +12,10 @@ import java.time.OffsetDateTime;
 public class TemporaryUploadLocation {
 
     @JsonProperty("Url")
-    private String url = null;
+    private String url;
 
     @JsonProperty("ExpirationTime")
-    private OffsetDateTime expirationTime = null;
+    private OffsetDateTime expirationTime;
 
     public TemporaryUploadLocation url(String url) {
         this.url = url;

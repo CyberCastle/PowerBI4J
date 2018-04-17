@@ -11,19 +11,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CredentialDetails {
 
     @JsonProperty("credentials")
-    private String credentials = null;
+    private String credentials;
 
     @JsonProperty("credentialType")
-    private String credentialType = null;
+    private String credentialType;
 
     @JsonProperty("encryptedConnection")
-    private String encryptedConnection = null;
+    private String encryptedConnection;
 
     @JsonProperty("encryptionAlgorithm")
-    private String encryptionAlgorithm = null;
+    private String encryptionAlgorithm;
 
     @JsonProperty("privacyLevel")
-    private String privacyLevel = null;
+    private String privacyLevel;
 
     public CredentialDetails credentials(String credentials) {
         this.credentials = credentials;

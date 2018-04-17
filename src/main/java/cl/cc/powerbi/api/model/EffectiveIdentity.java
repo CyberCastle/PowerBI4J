@@ -13,16 +13,16 @@ import java.util.List;
 public class EffectiveIdentity {
 
     @JsonProperty("username")
-    private String username = null;
+    private String username;
 
     @JsonProperty("roles")
-    private List<String> roles = null;
+    private List<String> roles;
 
     @JsonProperty("datasets")
     private List<String> datasets = new ArrayList<String>();
 
     @JsonProperty("customData")
-    private String customData = null;
+    private String customData;
 
     public EffectiveIdentity username(String username) {
         this.username = username;

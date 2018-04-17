@@ -19,7 +19,7 @@ import java.util.Objects;
 public class Table {
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("columns")
     private List<Column> columns = new ArrayList<Column>();
@@ -28,7 +28,7 @@ public class Table {
     private List<Measure> measures = new ArrayList<Measure>();
 
     @JsonProperty("rows")
-    private List<Row> rows = null;
+    private List<Row> rows;
 
     public Table() {
 

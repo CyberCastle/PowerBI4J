@@ -11,16 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DatasetParameter {
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("type")
-    private String type = null;
+    private String type;
 
     @JsonProperty("currentValue")
-    private String currentValue = null;
+    private String currentValue;
 
     @JsonProperty("isRequired")
-    private Boolean isRequired = null;
+    private Boolean isRequired;
 
     public DatasetParameter name(String name) {
         this.name = name;

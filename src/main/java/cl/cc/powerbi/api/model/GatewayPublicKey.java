@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class GatewayPublicKey {
 
     @JsonProperty("exponent")
-    private String exponent = null;
+    private String exponent;
 
     @JsonProperty("modulus")
-    private String modulus = null;
+    private String modulus;
 
     public GatewayPublicKey exponent(String exponent) {
         this.exponent = exponent;

@@ -11,16 +11,16 @@ import java.util.Objects;
 public class Measure {
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("expression")
-    private String expression = null;
+    private String expression;
 
     @JsonProperty("formatString")
-    private String formatString = null;
+    private String formatString;
 
     @JsonProperty("isHidden")
-    private Boolean isHidden = null;
+    private Boolean isHidden;
 
     public Measure() {
 

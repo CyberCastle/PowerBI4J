@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Row {
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     public Row id(String id) {
         this.id = id;

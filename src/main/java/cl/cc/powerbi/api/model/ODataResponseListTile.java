@@ -13,10 +13,10 @@ import java.util.List;
 public class ODataResponseListTile {
 
     @JsonProperty("odata.context")
-    private String odataContext = null;
+    private String odataContext;
 
     @JsonProperty("value")
-    private List<Tile> value = null;
+    private List<Tile> value;
 
     public ODataResponseListTile odataContext(String odataContext) {
         this.odataContext = odataContext;

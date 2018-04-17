@@ -13,10 +13,10 @@ import java.util.List;
 public class ODataResponseListGatewayDatasource {
 
     @JsonProperty("odata.context")
-    private String odataContext = null;
+    private String odataContext;
 
     @JsonProperty("value")
-    private List<GatewayDatasource> value = null;
+    private List<GatewayDatasource> value;
 
     public ODataResponseListGatewayDatasource odataContext(String odataContext) {
         this.odataContext = odataContext;

@@ -11,28 +11,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Tile {
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     @JsonProperty("title")
-    private String title = null;
+    private String title;
 
     @JsonProperty("rowSpan")
-    private Integer rowSpan = null;
+    private Integer rowSpan;
 
     @JsonProperty("colSpan")
-    private Integer colSpan = null;
+    private Integer colSpan;
 
     @JsonProperty("embedUrl")
-    private String embedUrl = null;
+    private String embedUrl;
 
     @JsonProperty("embedData")
-    private String embedData = null;
+    private String embedData;
 
     @JsonProperty("reportId")
-    private String reportId = null;
+    private String reportId;
 
     @JsonProperty("datasetId")
-    private String datasetId = null;
+    private String datasetId;
 
     public Tile id(String id) {
         this.id = id;

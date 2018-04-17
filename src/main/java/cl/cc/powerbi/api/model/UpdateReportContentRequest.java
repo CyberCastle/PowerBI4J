@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UpdateReportContentRequest {
 
     @JsonProperty("sourceType")
-    private String sourceType = null;
+    private String sourceType;
 
     @JsonProperty("sourceReport")
-    private SourceReport sourceReport = null;
+    private SourceReport sourceReport;
 
     public UpdateReportContentRequest sourceType(String sourceType) {
         this.sourceType = sourceType;

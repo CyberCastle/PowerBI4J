@@ -15,16 +15,16 @@ import java.util.List;
 public class Capacity {
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     @JsonProperty("displayName")
-    private String displayName = null;
+    private String displayName;
 
     @JsonProperty("admins")
-    private List<String> admins = null;
+    private List<String> admins;
 
     @JsonProperty("sku")
-    private String sku = null;
+    private String sku;
 
     /**
      * The capacity state
@@ -69,7 +69,7 @@ public class Capacity {
     }
 
     @JsonProperty("state")
-    private StateEnum state = null;
+    private StateEnum state;
 
     /**
      * Access rights user has for capacity
@@ -107,7 +107,7 @@ public class Capacity {
     }
 
     @JsonProperty("capacityUserAccessRight")
-    private CapacityUserAccessRightEnum capacityUserAccessRight = null;
+    private CapacityUserAccessRightEnum capacityUserAccessRight;
 
     public Capacity id(String id) {
         this.id = id;

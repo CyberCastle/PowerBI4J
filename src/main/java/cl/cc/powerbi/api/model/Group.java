@@ -11,19 +11,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Group {
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("isReadOnly")
-    private Boolean isReadOnly = null;
+    private Boolean isReadOnly;
 
     @JsonProperty("isOnDedicatedCapacity")
-    private Boolean isOnDedicatedCapacity = null;
+    private Boolean isOnDedicatedCapacity;
 
     @JsonProperty("capacityId")
-    private String capacityId = null;
+    private String capacityId;
 
     public Group id(String id) {
         this.id = id;

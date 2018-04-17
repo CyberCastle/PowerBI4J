@@ -11,22 +11,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Datasource {
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("connectionString")
-    private String connectionString = null;
+    private String connectionString;
 
     @JsonProperty("datasourceType")
-    private String datasourceType = null;
+    private String datasourceType;
 
     @JsonProperty("connectionDetails")
-    private DatasourceConnectionDetails connectionDetails = null;
+    private DatasourceConnectionDetails connectionDetails;
 
     @JsonProperty("gatewayId")
-    private String gatewayId = null;
+    private String gatewayId;
 
     @JsonProperty("datasourceId")
-    private String datasourceId = null;
+    private String datasourceId;
 
     public Datasource name(String name) {
         this.name = name;

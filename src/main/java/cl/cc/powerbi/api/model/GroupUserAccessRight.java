@@ -48,10 +48,10 @@ public class GroupUserAccessRight {
     }
 
     @JsonProperty("groupUserAccessRight")
-    private GroupUserAccessRightEnum groupUserAccessRight = null;
+    private GroupUserAccessRightEnum groupUserAccessRight;
 
     @JsonProperty("emailAddress")
-    private String emailAddress = null;
+    private String emailAddress;
 
     public GroupUserAccessRight groupUserAccessRight(GroupUserAccessRightEnum groupUserAccessRight) {
         this.groupUserAccessRight = groupUserAccessRight;

@@ -11,25 +11,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class GatewayDatasource {
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     @JsonProperty("gatewayId")
-    private String gatewayId = null;
+    private String gatewayId;
 
     @JsonProperty("datasourceName")
-    private String datasourceName = null;
+    private String datasourceName;
 
     @JsonProperty("datasourceType")
-    private String datasourceType = null;
+    private String datasourceType;
 
     @JsonProperty("connectionDetails")
-    private String connectionDetails = null;
+    private String connectionDetails;
 
     @JsonProperty("credentialType")
-    private String credentialType = null;
+    private String credentialType;
 
     @JsonProperty("basicCredentials")
-    private BasicCredentials basicCredentials = null;
+    private BasicCredentials basicCredentials;
 
     public GatewayDatasource id(String id) {
         this.id = id;

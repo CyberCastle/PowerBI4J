@@ -48,10 +48,10 @@ public class GroupUser {
     }
 
     @JsonProperty("userType")
-    private UserTypeEnum userType = null;
+    private UserTypeEnum userType;
 
     @JsonProperty("emailAddress")
-    private String emailAddress = null;
+    private String emailAddress;
 
     public GroupUser userType(UserTypeEnum userType) {
         this.userType = userType;

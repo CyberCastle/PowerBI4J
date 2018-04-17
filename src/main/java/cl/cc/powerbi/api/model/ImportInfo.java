@@ -11,13 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ImportInfo {
 
     @JsonProperty("filePath")
-    private String filePath = null;
+    private String filePath;
 
     @JsonProperty("connectionType")
-    private String connectionType = null;
+    private String connectionType;
 
     @JsonProperty("fileUrl")
-    private String fileUrl = null;
+    private String fileUrl;
 
     public ImportInfo filePath(String filePath) {
         this.filePath = filePath;

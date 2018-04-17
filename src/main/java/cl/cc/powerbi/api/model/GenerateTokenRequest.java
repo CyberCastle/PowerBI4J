@@ -50,16 +50,16 @@ public class GenerateTokenRequest {
     }
 
     @JsonProperty("accessLevel")
-    private AccessLevelEnum accessLevel = null;
+    private AccessLevelEnum accessLevel;
 
     @JsonProperty("datasetId")
-    private String datasetId = null;
+    private String datasetId;
 
     @JsonProperty("allowSaveAs")
-    private Boolean allowSaveAs = null;
+    private Boolean allowSaveAs;
 
     @JsonProperty("identities")
-    private List<EffectiveIdentity> identities = null;
+    private List<EffectiveIdentity> identities;
 
     public GenerateTokenRequest accessLevel(AccessLevelEnum accessLevel) {
         this.accessLevel = accessLevel;

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class BindToGatewayRequest {
 
     @JsonProperty("gatewayObjectId")
-    private String gatewayObjectId = null;
+    private String gatewayObjectId;
 
     public BindToGatewayRequest gatewayObjectId(String gatewayObjectId) {
         this.gatewayObjectId = gatewayObjectId;

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class AssignToCapacityRequest {
 
     @JsonProperty("capacityId")
-    private String capacityId = null;
+    private String capacityId;
 
     public AssignToCapacityRequest capacityId(String capacityId) {
         this.capacityId = capacityId;

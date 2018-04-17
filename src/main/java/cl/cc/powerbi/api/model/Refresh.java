@@ -12,19 +12,19 @@ import java.time.OffsetDateTime;
 public class Refresh {
 
     @JsonProperty("refreshType")
-    private String refreshType = null;
+    private String refreshType;
 
     @JsonProperty("startTime")
-    private OffsetDateTime startTime = null;
+    private OffsetDateTime startTime;
 
     @JsonProperty("endTime")
-    private OffsetDateTime endTime = null;
+    private OffsetDateTime endTime;
 
     @JsonProperty("serviceExceptionJson")
-    private String serviceExceptionJson = null;
+    private String serviceExceptionJson;
 
     @JsonProperty("status")
-    private String status = null;
+    private String status;
 
     public Refresh refreshType(String refreshType) {
         this.refreshType = refreshType;

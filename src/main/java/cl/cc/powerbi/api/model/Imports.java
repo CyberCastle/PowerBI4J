@@ -14,25 +14,25 @@ import java.util.List;
 public class Imports {
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("importState")
-    private String importState = null;
+    private String importState;
 
     @JsonProperty("reports")
-    private List<Report> reports = null;
+    private List<Report> reports;
 
     @JsonProperty("datasets")
-    private List<Dataset> datasets = null;
+    private List<Dataset> datasets;
 
     @JsonProperty("createdDateTime")
-    private OffsetDateTime createdDateTime = null;
+    private OffsetDateTime createdDateTime;
 
     @JsonProperty("updatedDateTime")
-    private OffsetDateTime updatedDateTime = null;
+    private OffsetDateTime updatedDateTime;
 
     public Imports id(String id) {
         this.id = id;

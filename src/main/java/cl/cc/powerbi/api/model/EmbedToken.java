@@ -12,13 +12,13 @@ import java.time.OffsetDateTime;
 public class EmbedToken {
 
     @JsonProperty("token")
-    private String token = null;
+    private String token;
 
     @JsonProperty("tokenId")
-    private String tokenId = null;
+    private String tokenId;
 
     @JsonProperty("expiration")
-    private OffsetDateTime expiration = null;
+    private OffsetDateTime expiration;
 
     public EmbedToken token(String token) {
         this.token = token;

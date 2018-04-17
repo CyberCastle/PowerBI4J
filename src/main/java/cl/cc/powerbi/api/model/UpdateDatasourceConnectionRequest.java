@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UpdateDatasourceConnectionRequest {
 
     @JsonProperty("connectionDetails")
-    private DatasourceConnectionDetails connectionDetails = null;
+    private DatasourceConnectionDetails connectionDetails;
 
     @JsonProperty("datasourceSelector")
-    private Datasource datasourceSelector = null;
+    private Datasource datasourceSelector;
 
     public UpdateDatasourceConnectionRequest connectionDetails(DatasourceConnectionDetails connectionDetails) {
         this.connectionDetails = connectionDetails;

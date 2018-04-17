@@ -11,13 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DatasourceConnectionDetails {
 
     @JsonProperty("server")
-    private String server = null;
+    private String server;
 
     @JsonProperty("database")
-    private String database = null;
+    private String database;
 
     @JsonProperty("url")
-    private String url = null;
+    private String url;
 
     public DatasourceConnectionDetails server(String server) {
         this.server = server;

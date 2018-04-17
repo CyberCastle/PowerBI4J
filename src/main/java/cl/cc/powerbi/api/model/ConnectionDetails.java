@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ConnectionDetails {
 
     @JsonProperty("connectionString")
-    private String connectionString = null;
+    private String connectionString;
 
     public ConnectionDetails connectionString(String connectionString) {
         this.connectionString = connectionString;

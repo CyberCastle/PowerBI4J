@@ -11,13 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CloneReportRequest {
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("targetWorkspaceId")
-    private String targetWorkspaceId = null;
+    private String targetWorkspaceId;
 
     @JsonProperty("targetModelId")
-    private String targetModelId = null;
+    private String targetModelId;
 
     public CloneReportRequest name(String name) {
         this.name = name;

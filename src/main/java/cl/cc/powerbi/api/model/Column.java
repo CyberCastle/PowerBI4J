@@ -18,10 +18,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public class Column {
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("dataType")
-    private DataType dataType = null;
+    private DataType dataType;
 
     public enum DataType {
         INT64("Int64"),

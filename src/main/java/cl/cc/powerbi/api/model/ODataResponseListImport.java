@@ -13,10 +13,10 @@ import java.util.List;
 public class ODataResponseListImport {
 
     @JsonProperty("odata.context")
-    private String odataContext = null;
+    private String odataContext;
 
     @JsonProperty("value")
-    private List<Imports> value = null;
+    private List<Imports> value;
 
     public ODataResponseListImport odataContext(String odataContext) {
         this.odataContext = odataContext;

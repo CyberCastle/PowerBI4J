@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SourceReport {
 
     @JsonProperty("sourceReportId")
-    private String sourceReportId = null;
+    private String sourceReportId;
 
     @JsonProperty("sourceWorkspaceId")
-    private String sourceWorkspaceId = null;
+    private String sourceWorkspaceId;
 
     public SourceReport sourceReportId(String sourceReportId) {
         this.sourceReportId = sourceReportId;

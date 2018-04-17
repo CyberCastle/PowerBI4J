@@ -11,19 +11,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Report {
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("webUrl")
-    private String webUrl = null;
+    private String webUrl;
 
     @JsonProperty("embedUrl")
-    private String embedUrl = null;
+    private String embedUrl;
 
     @JsonProperty("datasetId")
-    private String datasetId = null;
+    private String datasetId;
 
     public Report id(String id) {
         this.id = id;

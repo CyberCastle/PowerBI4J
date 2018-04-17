@@ -50,10 +50,10 @@ public class UserAccessRight {
     }
 
     @JsonProperty("datasourceAccessRight")
-    private DatasourceAccessRightEnum datasourceAccessRight = null;
+    private DatasourceAccessRightEnum datasourceAccessRight;
 
     @JsonProperty("emailAddress")
-    private String emailAddress = null;
+    private String emailAddress;
 
     public UserAccessRight datasourceAccessRight(DatasourceAccessRightEnum datasourceAccessRight) {
         this.datasourceAccessRight = datasourceAccessRight;

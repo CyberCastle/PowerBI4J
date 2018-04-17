@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UpdateDatasourceRequest {
 
     @JsonProperty("credentialDetails")
-    private CredentialDetails credentialDetails = null;
+    private CredentialDetails credentialDetails;
 
     public UpdateDatasourceRequest credentialDetails(CredentialDetails credentialDetails) {
         this.credentialDetails = credentialDetails;

@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class BasicCredentials {
 
     @JsonProperty("username")
-    private String username = null;
+    private String username;
 
     @JsonProperty("password")
-    private String password = null;
+    private String password;
 
     public BasicCredentials username(String username) {
         this.username = username;

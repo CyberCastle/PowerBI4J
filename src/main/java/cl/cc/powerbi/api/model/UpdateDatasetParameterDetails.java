@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UpdateDatasetParameterDetails {
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("newValue")
-    private String newValue = null;
+    private String newValue;
 
     public UpdateDatasetParameterDetails name(String name) {
         this.name = name;

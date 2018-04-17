@@ -24,31 +24,31 @@ public class Dataset {
     }
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("configuredBy")
-    private String configuredBy = null;
+    private String configuredBy;
 
     @JsonProperty("defaultRetentionPolicy")
-    private String defaultRetentionPolicy = null;
+    private String defaultRetentionPolicy;
 
     @JsonProperty("addRowsAPIEnabled")
-    private Boolean addRowsAPIEnabled = null;
+    private Boolean addRowsAPIEnabled;
 
     @JsonProperty("tables")
     private List<Table> tables = new ArrayList<Table>();
 
     @JsonProperty("relationships")
-    private List<Relationship> relationships = null;
+    private List<Relationship> relationships;
 
     @JsonProperty("webUrl")
-    private String webUrl = null;
+    private String webUrl;
 
     @JsonProperty("datasources")
-    private List<Datasource> datasources = null;
+    private List<Datasource> datasources;
 
     /**
      * The dataset mode or type
@@ -88,19 +88,19 @@ public class Dataset {
     }
 
     @JsonProperty("defaultMode")
-    private DefaultModeEnum defaultMode = null;
+    private DefaultModeEnum defaultMode;
 
     @JsonProperty("IsRefreshable")
-    private Boolean isRefreshable = null;
+    private Boolean isRefreshable;
 
     @JsonProperty("IsEffectiveIdentityRequired")
-    private Boolean isEffectiveIdentityRequired = null;
+    private Boolean isEffectiveIdentityRequired;
 
     @JsonProperty("IsEffectiveIdentityRolesRequired")
-    private Boolean isEffectiveIdentityRolesRequired = null;
+    private Boolean isEffectiveIdentityRolesRequired;
 
     @JsonProperty("IsOnPremGatewayRequired")
-    private Boolean isOnPremGatewayRequired = null;
+    private Boolean isOnPremGatewayRequired;
 
     public Dataset id(String id) {
         this.id = id;

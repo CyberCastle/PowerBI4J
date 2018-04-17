@@ -11,16 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Dashboard {
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     @JsonProperty("displayName")
-    private String displayName = null;
+    private String displayName;
 
     @JsonProperty("isReadOnly")
-    private Boolean isReadOnly = null;
+    private Boolean isReadOnly;
 
     @JsonProperty("embedUrl")
-    private String embedUrl = null;
+    private String embedUrl;
 
     public Dashboard id(String id) {
         this.id = id;

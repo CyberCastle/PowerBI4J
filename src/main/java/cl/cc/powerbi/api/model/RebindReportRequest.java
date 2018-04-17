@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RebindReportRequest {
 
     @JsonProperty("datasetId")
-    private String datasetId = null;
+    private String datasetId;
 
     public RebindReportRequest datasetId(String datasetId) {
         this.datasetId = datasetId;

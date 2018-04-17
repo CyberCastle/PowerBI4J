@@ -11,19 +11,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CloneTileRequest {
 
     @JsonProperty("targetDashboardId")
-    private String targetDashboardId = null;
+    private String targetDashboardId;
 
     @JsonProperty("targetWorkspaceId")
-    private String targetWorkspaceId = null;
+    private String targetWorkspaceId;
 
     @JsonProperty("targetReportId")
-    private String targetReportId = null;
+    private String targetReportId;
 
     @JsonProperty("targetModelId")
-    private String targetModelId = null;
+    private String targetModelId;
 
     @JsonProperty("positionConflictAction")
-    private String positionConflictAction = null;
+    private String positionConflictAction;
 
     public CloneTileRequest targetDashboardId(String targetDashboardId) {
         this.targetDashboardId = targetDashboardId;

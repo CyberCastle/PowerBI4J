@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public class Relationship {
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     /**
      * The filter direction of the relationship
@@ -54,16 +54,16 @@ public class Relationship {
     private CrossFilteringBehaviorEnum crossFilteringBehavior = CrossFilteringBehaviorEnum.ONEDIRECTION;
 
     @JsonProperty("fromTable")
-    private String fromTable = null;
+    private String fromTable;
 
     @JsonProperty("fromColumn")
-    private String fromColumn = null;
+    private String fromColumn;
 
     @JsonProperty("toTable")
-    private String toTable = null;
+    private String toTable;
 
     @JsonProperty("toColumn")
-    private String toColumn = null;
+    private String toColumn;
 
     public Relationship name(String name) {
         this.name = name;

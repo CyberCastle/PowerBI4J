@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class AddDashboardRequest {
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     public AddDashboardRequest name(String name) {
         this.name = name;

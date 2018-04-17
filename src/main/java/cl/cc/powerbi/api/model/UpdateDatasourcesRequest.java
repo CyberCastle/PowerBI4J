@@ -13,7 +13,7 @@ import java.util.List;
 public class UpdateDatasourcesRequest {
 
     @JsonProperty("updateDetails")
-    private List<UpdateDatasourceConnectionRequest> updateDetails = null;
+    private List<UpdateDatasourceConnectionRequest> updateDetails;
 
     public UpdateDatasourcesRequest updateDetails(List<UpdateDatasourceConnectionRequest> updateDetails) {
         this.updateDetails = updateDetails;

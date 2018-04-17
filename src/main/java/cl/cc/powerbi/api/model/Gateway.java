@@ -11,22 +11,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Gateway {
 
     @JsonProperty("id")
-    private String id = null;
+    private String id;
 
     @JsonProperty("name")
-    private String name = null;
+    private String name;
 
     @JsonProperty("type")
-    private String type = null;
+    private String type;
 
     @JsonProperty("gatewayAnnotation")
-    private String gatewayAnnotation = null;
+    private String gatewayAnnotation;
 
     @JsonProperty("publicKey")
-    private GatewayPublicKey publicKey = null;
+    private GatewayPublicKey publicKey;
 
     @JsonProperty("gatewayStatus")
-    private String gatewayStatus = null;
+    private String gatewayStatus;
 
     public Gateway id(String id) {
         this.id = id;

@@ -11,16 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PublishDatasourceToGatewayRequest {
 
     @JsonProperty("dataSourceType")
-    private String dataSourceType = null;
+    private String dataSourceType;
 
     @JsonProperty("connectionDetails")
-    private String connectionDetails = null;
+    private String connectionDetails;
 
     @JsonProperty("credentialDetails")
-    private CredentialDetails credentialDetails = null;
+    private CredentialDetails credentialDetails;
 
     @JsonProperty("dataSourceName")
-    private String dataSourceName = null;
+    private String dataSourceName;
 
     public PublishDatasourceToGatewayRequest dataSourceType(String dataSourceType) {
         this.dataSourceType = dataSourceType;
