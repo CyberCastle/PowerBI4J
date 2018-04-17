@@ -42,7 +42,7 @@ public class Relationship {
         @JsonCreator
         public static CrossFilteringBehaviorEnum fromValue(String text) {
             for (CrossFilteringBehaviorEnum b : CrossFilteringBehaviorEnum.values()) {
-                if (String.valueOf(b.value).equals(text)) {
+                if (String.valueOf(b.value).equalsIgnoreCase(text)) {
                     return b;
                 }
             }
