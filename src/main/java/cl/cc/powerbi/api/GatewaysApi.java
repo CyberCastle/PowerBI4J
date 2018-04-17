@@ -2,6 +2,7 @@ package cl.cc.powerbi.api;
 
 import cl.cc.powerbi.api.model.Gateway;
 import cl.cc.powerbi.api.model.ODataResponseListGateway;
+import cl.cc.powerbi.auth.Authenticator;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -16,6 +17,10 @@ import java.util.Map;
  * @author CyberCastle
  */
 public class GatewaysApi extends BaseApiAbstract {
+
+    public GatewaysApi(Authenticator auth) {
+        super(auth);
+    }
 
     public GatewaysApi(String accessToken) {
         super(accessToken);

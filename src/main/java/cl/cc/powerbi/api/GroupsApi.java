@@ -6,6 +6,7 @@ import cl.cc.powerbi.api.model.GroupCreationRequest;
 import cl.cc.powerbi.api.model.GroupUserAccessRight;
 import cl.cc.powerbi.api.model.ODataResponseListGroup;
 import cl.cc.powerbi.api.model.ODataResponseListGroupUserAccessRight;
+import cl.cc.powerbi.auth.Authenticator;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,6 +21,10 @@ import java.util.Map;
  * @author CyberCastle
  */
 public class GroupsApi extends BaseApiAbstract {
+
+    public GroupsApi(Authenticator auth) {
+        super(auth);
+    }
 
     public GroupsApi(String accessToken) {
         super(accessToken);

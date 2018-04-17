@@ -1,6 +1,7 @@
 package cl.cc.powerbi.api;
 
 import cl.cc.powerbi.api.model.ODataResponseListCapacity;
+import cl.cc.powerbi.auth.Authenticator;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -11,6 +12,10 @@ import org.springframework.http.HttpMethod;
  * @author CyberCastle
  */
 public class CapacitiesApi extends BaseApiAbstract {
+
+    public CapacitiesApi(Authenticator auth) {
+        super(auth);
+    }
 
     public CapacitiesApi(String accessToken) {
         super(accessToken);

@@ -7,6 +7,7 @@ import cl.cc.powerbi.api.model.ODataResponseListReport;
 import cl.cc.powerbi.api.model.RebindReportRequest;
 import cl.cc.powerbi.api.model.Report;
 import cl.cc.powerbi.api.model.UpdateReportContentRequest;
+import cl.cc.powerbi.auth.Authenticator;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,6 +24,10 @@ import java.util.Map;
  * @author CyberCastle
  */
 public class ReportsApi extends BaseApiAbstract {
+
+    public ReportsApi(Authenticator auth) {
+        super(auth);
+    }
 
     public ReportsApi(String accessToken) {
         super(accessToken);

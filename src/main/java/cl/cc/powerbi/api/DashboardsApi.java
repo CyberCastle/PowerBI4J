@@ -5,6 +5,7 @@ import cl.cc.powerbi.api.model.Dashboard;
 import cl.cc.powerbi.api.model.EmbedToken;
 import cl.cc.powerbi.api.model.GenerateTokenRequest;
 import cl.cc.powerbi.api.model.ODataResponseListDashboard;
+import cl.cc.powerbi.auth.Authenticator;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -19,6 +20,10 @@ import java.util.Map;
  * @author CyberCastle
  */
 public class DashboardsApi extends BaseApiAbstract {
+
+    public DashboardsApi(Authenticator auth) {
+        super(auth);
+    }
 
     public DashboardsApi(String accessToken) {
         super(accessToken);

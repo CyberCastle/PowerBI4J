@@ -1,5 +1,7 @@
 package cl.cc.powerbi.api;
 
+import cl.cc.powerbi.auth.AuthenticationException;
+import cl.cc.powerbi.auth.Authenticator;
 import cl.cc.utils.ISO8601Utils;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.io.BufferedReader;
@@ -47,15 +49,27 @@ public abstract class BaseApiAbstract {
     protected static final MediaType[] defaultAccepts = {MediaType.APPLICATION_JSON};
 
     private static final String BASE_PATH = "https://api.powerbi.com";
-    private final RestTemplate restTemplate;
+    private RestTemplate restTemplate;
     private HttpStatus statusCode;
     private MultiValueMap<String, String> responseHeaders;
 
+    // Authenticator for the generation of the access token
+    private Authenticator auth;
+
     // Authorization token for services access
-    private final String accessToken;
+    private String accessToken;
+
+    public BaseApiAbstract(Authenticator auth) {
+        this.auth = auth;
+        this.init();
+    }
 
     public BaseApiAbstract(String accessToken) {
         this.accessToken = accessToken;
+        this.init();
+    }
+
+    private void init() {
         this.restTemplate = new RestTemplate();
 
         List<HttpMessageConverter<?>> converters = this.restTemplate.getMessageConverters();
@@ -115,6 +129,10 @@ public abstract class BaseApiAbstract {
         }
     }
 
+    public void obtainToken() throws AuthenticationException {
+        this.accessToken = this.auth.authenticate();
+    }
+
     /**
      * Format the given parameter object into string.
      *
@@ -122,7 +140,7 @@ public abstract class BaseApiAbstract {
      * @return String the parameter represented as a String
      */
     @SuppressWarnings("unchecked")
-    protected String parameterToString(Object param) {
+    protected final String parameterToString(Object param) {
         if (param == null) {
             return "";
         } else if (param instanceof Date) {
@@ -152,7 +170,7 @@ public abstract class BaseApiAbstract {
      * @param value The parameter's value
      * @return a Map containing the String value(s) of the input parameter
      */
-    protected MultiValueMap<String, String> parameterToMultiValueMap(CollectionFormat collectionFormat, String name, Object value) {
+    protected final MultiValueMap<String, String> parameterToMultiValueMap(CollectionFormat collectionFormat, String name, Object value) {
         final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 
         if (name == null || name.isEmpty() || value == null) {
@@ -204,7 +222,7 @@ public abstract class BaseApiAbstract {
      * @param returnType The return type into which to deserialize the response
      * @return The response body in chosen type
      */
-    public <T> T invokeAPI(String path,
+    protected final <T> T invokeAPI(String path,
             HttpMethod method,
             MultiValueMap<String, String> queryParams,
             Object body,

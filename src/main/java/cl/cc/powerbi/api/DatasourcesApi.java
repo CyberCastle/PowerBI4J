@@ -6,6 +6,7 @@ import cl.cc.powerbi.api.model.ODataResponseListUserAccessRight;
 import cl.cc.powerbi.api.model.PublishDatasourceToGatewayRequest;
 import cl.cc.powerbi.api.model.UpdateDatasourceRequest;
 import cl.cc.powerbi.api.model.UserAccessRight;
+import cl.cc.powerbi.auth.Authenticator;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,6 +21,10 @@ import java.util.Map;
  * @author CyberCastle
  */
 public class DatasourcesApi extends BaseApiAbstract {
+
+    public DatasourcesApi(Authenticator auth) {
+        super(auth);
+    }
 
     public DatasourcesApi(String accessToken) {
         super(accessToken);

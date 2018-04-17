@@ -4,6 +4,7 @@ import cl.cc.powerbi.api.model.ImportInfo;
 import cl.cc.powerbi.api.model.Imports;
 import cl.cc.powerbi.api.model.ODataResponseListImport;
 import cl.cc.powerbi.api.model.TemporaryUploadLocation;
+import cl.cc.powerbi.auth.Authenticator;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,6 +21,10 @@ import org.springframework.util.MultiValueMap;
  * @author CyberCastle
  */
 public class ImportsApi extends BaseApiAbstract {
+
+    public ImportsApi(Authenticator auth) {
+        super(auth);
+    }
 
     public ImportsApi(String accessToken) {
         super(accessToken);

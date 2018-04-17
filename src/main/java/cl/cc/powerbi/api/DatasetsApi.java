@@ -13,6 +13,7 @@ import cl.cc.powerbi.api.model.ODataResponseListRefresh;
 import cl.cc.powerbi.api.model.ODataResponseListTable;
 import cl.cc.powerbi.api.model.UpdateDatasetParametersRequest;
 import cl.cc.powerbi.api.model.UpdateDatasourcesRequest;
+import cl.cc.powerbi.auth.Authenticator;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
@@ -29,6 +30,10 @@ import java.util.Map;
  * @author CyberCastle
  */
 public class DatasetsApi extends BaseApiAbstract {
+
+    public DatasetsApi(Authenticator auth) {
+        super(auth);
+    }
 
     public DatasetsApi(String accessToken) {
         super(accessToken);

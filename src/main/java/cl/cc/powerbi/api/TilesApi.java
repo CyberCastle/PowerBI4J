@@ -5,6 +5,7 @@ import cl.cc.powerbi.api.model.EmbedToken;
 import cl.cc.powerbi.api.model.GenerateTokenRequest;
 import cl.cc.powerbi.api.model.ODataResponseListTile;
 import cl.cc.powerbi.api.model.Tile;
+import cl.cc.powerbi.auth.Authenticator;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -19,6 +20,10 @@ import java.util.Map;
  * @author CyberCastle
  */
 public class TilesApi extends BaseApiAbstract {
+
+    public TilesApi(Authenticator auth) {
+        super(auth);
+    }
 
     public TilesApi(String accessToken) {
         super(accessToken);
