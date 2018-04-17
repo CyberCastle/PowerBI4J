@@ -31,6 +31,12 @@ public class Measure {
         this.expression = expression;
     }
 
+    public Measure(String name, String expression, String formatString) {
+        this.name = name;
+        this.expression = expression;
+        this.formatString = formatString;
+    }
+
     /**
      * User defined name of the measure.
      *
