@@ -49,7 +49,7 @@ public class Column {
         @JsonCreator
         public static DataType fromValue(String text) {
             for (DataType b : DataType.values()) {
-                if (String.valueOf(b.value).equals(text)) {
+                if (String.valueOf(b.value).equalsIgnoreCase(text)) {
                     return b;
                 }
             }
