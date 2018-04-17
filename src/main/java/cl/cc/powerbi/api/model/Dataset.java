@@ -15,6 +15,14 @@ import java.util.List;
  */
 public class Dataset {
 
+    public Dataset() {
+
+    }
+
+    public Dataset(String name) {
+        this.name = name;
+    }
+
     @JsonProperty("id")
     private String id = null;
 
