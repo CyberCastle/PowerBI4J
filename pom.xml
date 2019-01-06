@@ -13,7 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <adal4j-version>1.4.0</adal4j-version>
         <spring-web-version>5.0.4.RELEASE</spring-web-version>
-        <jackson-version>2.9.5</jackson-version>
+        <jackson-version>2.9.8</jackson-version>
         <slf4j-version>1.7.25</slf4j-version>
     </properties>
     
