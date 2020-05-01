@@ -1,6 +1,7 @@
 package cl.cc;
 
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import cl.cc.powerbi.auth.Authenticator;
@@ -31,7 +32,9 @@ public class Run {
     public static void main(String... arg) throws Exception {
 
         System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "DEBUG");
-        Authenticator auth = new Authenticator(client_id, tenant, username, password, Executors.newFixedThreadPool(1));
+
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        Authenticator auth = new Authenticator(client_id, tenant, username, password, executorService);
         String accessToken = auth.authenticate();
         System.out.println("token: " + accessToken);
 
@@ -55,6 +58,7 @@ public class Run {
         // Get Token
         System.out.println(etokena.embedTokenGenerateToken(gen).getToken());
 
+        executorService.shutdown();
     }
 
 }
