@@ -23,7 +23,8 @@ public class AuthenticationException extends Exception {
         super(cause);
     }
 
-    protected AuthenticationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    protected AuthenticationException(String message, Throwable cause, boolean enableSuppression,
+            boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

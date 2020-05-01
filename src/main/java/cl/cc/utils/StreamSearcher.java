@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author CyberCastle
  *
- * Based on Twitter / Elephant-Bird library code
+ *         Based on Twitter / Elephant-Bird library code
  *
  */
 public final class StreamSearcher {
@@ -22,7 +22,8 @@ public final class StreamSearcher {
     private byte[] pattern_;
     private int[] borders_;
 
-    // An upper bound on pattern length for searching. Results are undefined for longer patterns.
+    // An upper bound on pattern length for searching. Results are undefined for
+    // longer patterns.
     public static final int MAX_PATTERN_LENGTH = 1024;
 
     public StreamSearcher(byte[] pattern) {
@@ -32,8 +33,8 @@ public final class StreamSearcher {
     /**
      * Sets a new pattern for this StreamSearcher to use.
      *
-     * @param pattern the pattern the StreamSearcher will look for in future
-     * calls to search(...)
+     * @param pattern the pattern the StreamSearcher will look for in future calls
+     *                to search(...)
      */
     public void setPattern(byte[] pattern) {
         pattern_ = Arrays.copyOf(pattern, pattern.length);
@@ -42,12 +43,12 @@ public final class StreamSearcher {
     }
 
     /**
-     * Searches for the next occurrence of the pattern in the stream, starting
-     * from the current stream position. Note that the position of the stream is
-     * changed. If a match is found, the stream points to the end of the match
-     * -- i.e. the byte AFTER the pattern. Else, the stream is entirely
-     * consumed. The latter is because InputStream semantics make it difficult
-     * to have another reasonable default, i.e. leave the stream unchanged.
+     * Searches for the next occurrence of the pattern in the stream, starting from
+     * the current stream position. Note that the position of the stream is changed.
+     * If a match is found, the stream points to the end of the match -- i.e. the
+     * byte AFTER the pattern. Else, the stream is entirely consumed. The latter is
+     * because InputStream semantics make it difficult to have another reasonable
+     * default, i.e. leave the stream unchanged.
      *
      * @return bytes consumed if found, -1 otherwise.
      * @throws IOException
@@ -59,16 +60,17 @@ public final class StreamSearcher {
         int j = 0;
 
         while ((b = stream.read()) != -1) {
-            bytesRead ++;
+            bytesRead++;
 
             while (j >= 0 && (byte) b != pattern_[j]) {
                 j = borders_[j];
             }
             // Move to the next character in the pattern.
-             ++ j;
+            ++j;
 
-            // If we've matched up to the full pattern length, we found it.  Return,
-            // which will automatically save our position in the InputStream at the point immediately
+            // If we've matched up to the full pattern length, we found it. Return,
+            // which will automatically save our position in the InputStream at the point
+            // immediately
             // following the pattern match.
             if (j == pattern_.length) {
                 return bytesRead;
@@ -84,12 +86,12 @@ public final class StreamSearcher {
      * Method based in this piece of code:
      * https://raw.githubusercontent.com/OpenEndedGroup/Field2/master/src/field/utility/StreamSearcher.java
      *
-     * Searches for the next occurrence of the pattern in the stream, starting
-     * from the current stream position. Note that the position of the stream is
-     * changed. If a match is found, the stream points to the end of the match
-     * -- i.e. the byte AFTER the pattern. Else, the stream is entirely
-     * consumed. The latter is because InputStream semantics make it difficult
-     * to have another reasonable default, i.e. leave the stream unchanged.
+     * Searches for the next occurrence of the pattern in the stream, starting from
+     * the current stream position. Note that the position of the stream is changed.
+     * If a match is found, the stream points to the end of the match -- i.e. the
+     * byte AFTER the pattern. Else, the stream is entirely consumed. The latter is
+     * because InputStream semantics make it difficult to have another reasonable
+     * default, i.e. leave the stream unchanged.
      *
      * @return bytes consumed if found, -1 otherwise.
      */
@@ -101,16 +103,17 @@ public final class StreamSearcher {
 
         while (stream.hasRemaining()) {
             b = stream.get();
-            bytesRead ++;
+            bytesRead++;
 
             while (j >= 0 && b != pattern_[j]) {
                 j = borders_[j];
             }
             // Move to the next character in the pattern.
-             ++ j;
+            ++j;
 
-            // If we've matched up to the full pattern length, we found it.  Return,
-            // which will automatically save our position in the InputStream at the point immediately
+            // If we've matched up to the full pattern length, we found it. Return,
+            // which will automatically save our position in the InputStream at the point
+            // immediately
             // following the pattern match.
             if (j == pattern_.length) {
                 return bytesRead;
@@ -130,8 +133,8 @@ public final class StreamSearcher {
         }
 
         int[] ret = new int[locations.size()];
-        for (int i = 0; i < ret.length; i ++) {
-            ret[i] = (int) (locations.get(i) + (i > 0 ? ret[i - 1] :  - this.pattern_.length));
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = (int) (locations.get(i) + (i > 0 ? ret[i - 1] : -this.pattern_.length));
         }
         return ret;
     }
@@ -145,8 +148,8 @@ public final class StreamSearcher {
         }
 
         int[] ret = new int[locations.size()];
-        for (int i = 0; i < ret.length; i ++) {
-            ret[i] = (int) (locations.get(i) + (i > 0 ? ret[i - 1] :  - this.pattern_.length));
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = (int) (locations.get(i) + (i > 0 ? ret[i - 1] : -this.pattern_.length));
         }
         return ret;
     }
@@ -167,7 +170,7 @@ public final class StreamSearcher {
             while (j >= 0 && pattern_[i] != pattern_[j]) {
                 j = borders_[j];
             }
-            borders_[ ++ i] =  ++ j;
+            borders_[++i] = ++j;
         }
     }
 }

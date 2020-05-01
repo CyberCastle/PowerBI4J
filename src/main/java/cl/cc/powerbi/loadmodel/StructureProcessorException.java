@@ -23,7 +23,8 @@ public class StructureProcessorException extends Exception {
         super(cause);
     }
 
-    protected StructureProcessorException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    protected StructureProcessorException(String message, Throwable cause, boolean enableSuppression,
+            boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

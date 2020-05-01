@@ -1,8 +1,10 @@
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -10,16 +12,15 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 /**
  *
  * @author CyberCastle
-
- Code generated with follow command: jsonschema2pojo -s StructureDescription.json -t
- targetFolder -a JACKSON2 -p cl.cc.powerbi.datamodel -sl -T JSON -tv 1.8 -c3
-
- Instructions to obtain the data model here:
- http://blogs.adatis.co.uk/simonwhiteley/post/PowerBI-Optimisation-P3-Extracting-and-Source-Controlling-PowerBI-Data-Models
+ * 
+ *         Code generated with follow command: jsonschema2pojo -s
+ *         StructureDescription.json -t targetFolder -a JACKSON2 -p
+ *         cl.cc.powerbi.datamodel -sl -T JSON -tv 1.8 -c3
+ * 
+ *         Instructions to obtain the data model here:
+ *         http://blogs.adatis.co.uk/simonwhiteley/post/PowerBI-Optimisation-P3-Extracting-and-Source-Controlling-PowerBI-Data-Models
  */
-@JsonPropertyOrder({
-    "create"
-})
+@JsonPropertyOrder({ "create" })
 public class StructureDescription implements Serializable {
 
     @JsonProperty("create")

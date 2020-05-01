@@ -1,8 +1,10 @@
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,11 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author CyberCastle
  */
-@JsonPropertyOrder({
-    "name",
-    "compatibilityLevel",
-    "model"
-})
+@JsonPropertyOrder({ "name", "compatibilityLevel", "model" })
 public class Database implements Serializable {
 
     @JsonProperty("name")
@@ -58,7 +56,8 @@ public class Database implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("compatibilityLevel", compatibilityLevel).append("model", model).toString();
+        return new ToStringBuilder(this).append("name", name).append("compatibilityLevel", compatibilityLevel)
+                .append("model", model).toString();
     }
 
     @Override
@@ -75,7 +74,8 @@ public class Database implements Serializable {
             return false;
         }
         Database rhs = ((Database) other);
-        return new EqualsBuilder().append(name, rhs.name).append(model, rhs.model).append(compatibilityLevel, rhs.compatibilityLevel).isEquals();
+        return new EqualsBuilder().append(name, rhs.name).append(model, rhs.model)
+                .append(compatibilityLevel, rhs.compatibilityLevel).isEquals();
     }
 
 }

@@ -1,20 +1,22 @@
 package cl.cc.powerbi.loadmodel;
 
-import cl.cc.powerbi.api.model.Column;
-import cl.cc.powerbi.api.model.Dataset;
-import cl.cc.powerbi.api.model.Measure;
-import cl.cc.powerbi.datamodel.Relationship;
-import cl.cc.powerbi.datamodel.StructureDescription;
-import cl.cc.powerbi.datamodel.Table;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import cl.cc.powerbi.client.model.Column;
+import cl.cc.powerbi.client.model.Dataset;
+import cl.cc.powerbi.datamodel.Relationship;
+import cl.cc.powerbi.datamodel.StructureDescription;
+import cl.cc.powerbi.datamodel.Table;
 
 /**
  *
@@ -42,7 +44,8 @@ public class StructureProcessor {
     }
 
     public Dataset generateDataset(String name) {
-        Dataset dataset = new Dataset(name);
+        Dataset dataset = new Dataset();
+        dataset.setName(name);
         this.addTablesToDataset(dataset);
         this.addRelationshipsToDataset(dataset);
         return dataset;
@@ -55,12 +58,16 @@ public class StructureProcessor {
             // We only list the visible tables, these will be created in Power BI Service
             if (tableSource.getIsHidden() == null || tableSource.getIsHidden() == false) {
                 log.debug(String.format("Processing table %s.", tableSource.getName()));
-                cl.cc.powerbi.api.model.Table tableTarget = new cl.cc.powerbi.api.model.Table(tableSource.getName());
+                cl.cc.powerbi.client.model.Table tableTarget = new cl.cc.powerbi.client.model.Table();
+                tableTarget.setName(tableSource.getName());
+
                 tableTarget.setColumns(this.copyColumns(tableSource));
-                if (tableSource.getMeasures() != null &&  ! tableSource.getMeasures().isEmpty()) {
+                if (tableSource.getMeasures() != null && !tableSource.getMeasures().isEmpty()) {
                     tableTarget.setMeasures(this.copyMeasures(tableSource));
                 }
-                dataset.addTablesItem(tableTarget);
+                // TODO post update: FIX
+                // dataset.addTablesItem(tableTarget);
+                // dataset.se
             }
         });
     }
@@ -70,40 +77,43 @@ public class StructureProcessor {
 
         relationshipsSource.forEach((relationshipSource) -> {
             log.debug(String.format("Processing relationship %s.", relationshipSource.getName()));
-            cl.cc.powerbi.api.model.Relationship relationshipTarget = new cl.cc.powerbi.api.model.Relationship(relationshipSource.getName());
-            relationshipTarget.crossFilteringBehavior(
-                    cl.cc.powerbi.api.model.Relationship.CrossFilteringBehaviorEnum.fromValue(relationshipSource.getCrossFilteringBehavior())
-            ).setReferences(relationshipSource.getFromTable(),
-                    relationshipSource.getFromColumn(),
-                    relationshipSource.getToTable(),
-                    relationshipSource.getToColumn()
-            );
+            cl.cc.powerbi.client.model.Relationship relationshipTarget = new cl.cc.powerbi.client.model.Relationship();
+            relationshipTarget.setName(relationshipSource.getName());
+
+            relationshipTarget.crossFilteringBehavior(cl.cc.powerbi.client.model.Relationship.CrossFilteringBehaviorEnum
+                    .fromValue(relationshipSource.getCrossFilteringBehavior()));
+
+            // TODO post update: FIX
+            /*
+             * .setReferences(relationshipSource.getFromTable(),
+             * relationshipSource.getFromColumn(), relationshipSource.getToTable(),
+             * relationshipSource.getToColumn());
+             */
+
         });
     }
 
-    private List<cl.cc.powerbi.api.model.Column> copyColumns(Table tableSource) {
-        List<cl.cc.powerbi.api.model.Column> columnsTarget = new LinkedList<>();
-        tableSource.getColumns().forEach(
-                (columnSource) -> {
-                    log.debug(String.format("Processing column %s of table %s.", columnSource.getName(), tableSource.getName()));
-                    columnsTarget.add(new Column(columnSource.getName(), Column.DataType.fromValue(columnSource.getDataType())));
-                });
+    private List<cl.cc.powerbi.client.model.Column> copyColumns(Table tableSource) {
+        List<cl.cc.powerbi.client.model.Column> columnsTarget = new LinkedList<>();
+        tableSource.getColumns().forEach((columnSource) -> {
+            log.debug(
+                    String.format("Processing column %s of table %s.", columnSource.getName(), tableSource.getName()));
+            columnsTarget.add(new Column().name(columnSource.getName()).dataType(columnSource.getDataType()));
+        });
         return columnsTarget;
     }
 
-    private List<cl.cc.powerbi.api.model.Measure> copyMeasures(Table tableSource) {
-        List<cl.cc.powerbi.api.model.Measure> measuresTarget = new LinkedList<>();
-        tableSource.getMeasures().forEach(
-                (measureSource) -> {
-                    log.debug(String.format("Processing measure %s of table %s.", measureSource.getName(), tableSource.getName()));
-                    measuresTarget.add(
-                            new Measure(
-                                    measureSource.getName(),
-                                    this.concatenateArrayStringList(measureSource.getExpression()),
-                                    measureSource.getFormatString()
-                            )
-                    );
-                });
+    private List<cl.cc.powerbi.client.model.Measure> copyMeasures(Table tableSource) {
+        List<cl.cc.powerbi.client.model.Measure> measuresTarget = new LinkedList<>();
+        tableSource.getMeasures().forEach((measureSource) -> {
+            log.debug(String.format("Processing measure %s of table %s.", measureSource.getName(),
+                    tableSource.getName()));
+
+            cl.cc.powerbi.client.model.Measure measureTarget = new cl.cc.powerbi.client.model.Measure();
+            measureTarget.setName(measureSource.getName());
+            measureTarget.setExpression(this.concatenateArrayStringList(measureSource.getExpression()));
+            measuresTarget.add(measureTarget);
+        });
         return measuresTarget;
     }
 

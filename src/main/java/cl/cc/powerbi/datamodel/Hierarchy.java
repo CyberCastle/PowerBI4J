@@ -3,8 +3,10 @@ package cl.cc.powerbi.datamodel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,11 +15,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author CyberCastle
  */
-@JsonPropertyOrder({
-    "name",
-    "levels",
-    "annotations"
-})
+@JsonPropertyOrder({ "name", "levels", "annotations" })
 public class Hierarchy implements Serializable {
 
     @JsonProperty("name")
@@ -60,7 +58,8 @@ public class Hierarchy implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("levels", levels).append("annotations", annotations).toString();
+        return new ToStringBuilder(this).append("name", name).append("levels", levels)
+                .append("annotations", annotations).toString();
     }
 
     @Override
@@ -77,7 +76,8 @@ public class Hierarchy implements Serializable {
             return false;
         }
         Hierarchy rhs = ((Hierarchy) other);
-        return new EqualsBuilder().append(name, rhs.name).append(annotations, rhs.annotations).append(levels, rhs.levels).isEquals();
+        return new EqualsBuilder().append(name, rhs.name).append(annotations, rhs.annotations)
+                .append(levels, rhs.levels).isEquals();
     }
 
 }

@@ -1,8 +1,10 @@
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,17 +13,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author CyberCastle
  */
-@JsonPropertyOrder({
-    "name",
-    "fromTable",
-    "fromColumn",
-    "toTable",
-    "toColumn",
-    "joinOnDateBehavior",
-    "isActive",
-    "crossFilteringBehavior",
-    "fromCardinality"
-})
+@JsonPropertyOrder({ "name", "fromTable", "fromColumn", "toTable", "toColumn", "joinOnDateBehavior", "isActive",
+        "crossFilteringBehavior", "fromCardinality" })
 public class Relationship implements Serializable {
 
     @JsonProperty("name")
@@ -136,12 +129,18 @@ public class Relationship implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("fromTable", fromTable).append("fromColumn", fromColumn).append("toTable", toTable).append("toColumn", toColumn).append("joinOnDateBehavior", joinOnDateBehavior).append("isActive", isActive).append("crossFilteringBehavior", crossFilteringBehavior).append("fromCardinality", fromCardinality).toString();
+        return new ToStringBuilder(this).append("name", name).append("fromTable", fromTable)
+                .append("fromColumn", fromColumn).append("toTable", toTable).append("toColumn", toColumn)
+                .append("joinOnDateBehavior", joinOnDateBehavior).append("isActive", isActive)
+                .append("crossFilteringBehavior", crossFilteringBehavior).append("fromCardinality", fromCardinality)
+                .toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(crossFilteringBehavior).append(fromColumn).append(toTable).append(joinOnDateBehavior).append(fromCardinality).append(isActive).append(toColumn).append(fromTable).toHashCode();
+        return new HashCodeBuilder().append(name).append(crossFilteringBehavior).append(fromColumn).append(toTable)
+                .append(joinOnDateBehavior).append(fromCardinality).append(isActive).append(toColumn).append(fromTable)
+                .toHashCode();
     }
 
     @Override
@@ -153,7 +152,11 @@ public class Relationship implements Serializable {
             return false;
         }
         Relationship rhs = ((Relationship) other);
-        return new EqualsBuilder().append(name, rhs.name).append(crossFilteringBehavior, rhs.crossFilteringBehavior).append(fromColumn, rhs.fromColumn).append(toTable, rhs.toTable).append(joinOnDateBehavior, rhs.joinOnDateBehavior).append(fromCardinality, rhs.fromCardinality).append(isActive, rhs.isActive).append(toColumn, rhs.toColumn).append(fromTable, rhs.fromTable).isEquals();
+        return new EqualsBuilder().append(name, rhs.name).append(crossFilteringBehavior, rhs.crossFilteringBehavior)
+                .append(fromColumn, rhs.fromColumn).append(toTable, rhs.toTable)
+                .append(joinOnDateBehavior, rhs.joinOnDateBehavior).append(fromCardinality, rhs.fromCardinality)
+                .append(isActive, rhs.isActive).append(toColumn, rhs.toColumn).append(fromTable, rhs.fromTable)
+                .isEquals();
     }
 
 }

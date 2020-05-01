@@ -1,8 +1,10 @@
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,10 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author CyberCastle
  */
-@JsonPropertyOrder({
-    "version",
-    "daxTemplateName"
-})
+@JsonPropertyOrder({ "version", "daxTemplateName" })
 public class Value implements Serializable {
 
     @JsonProperty("version")
@@ -45,7 +44,8 @@ public class Value implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("version", version).append("daxTemplateName", daxTemplateName).toString();
+        return new ToStringBuilder(this).append("version", version).append("daxTemplateName", daxTemplateName)
+                .toString();
     }
 
     @Override

@@ -1,8 +1,10 @@
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,12 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author CyberCastle
  */
-@JsonPropertyOrder({
-    "query",
-    "dataSource",
-    "type",
-    "expression"
-})
+@JsonPropertyOrder({ "query", "dataSource", "type", "expression" })
 public class Source implements Serializable {
 
     @JsonProperty("query")
@@ -71,7 +68,8 @@ public class Source implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("query", query).append("dataSource", dataSource).append("type", type).append("expression", expression).toString();
+        return new ToStringBuilder(this).append("query", query).append("dataSource", dataSource).append("type", type)
+                .append("expression", expression).toString();
     }
 
     @Override
@@ -88,7 +86,8 @@ public class Source implements Serializable {
             return false;
         }
         Source rhs = ((Source) other);
-        return new EqualsBuilder().append(expression, rhs.expression).append(type, rhs.type).append(dataSource, rhs.dataSource).append(query, rhs.query).isEquals();
+        return new EqualsBuilder().append(expression, rhs.expression).append(type, rhs.type)
+                .append(dataSource, rhs.dataSource).append(query, rhs.query).isEquals();
     }
 
 }

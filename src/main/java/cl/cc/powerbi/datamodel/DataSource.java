@@ -1,8 +1,10 @@
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,11 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author CyberCastle
  */
-@JsonPropertyOrder({
-    "name",
-    "connectionString",
-    "impersonationMode"
-})
+@JsonPropertyOrder({ "name", "connectionString", "impersonationMode" })
 public class DataSource implements Serializable {
 
     @JsonProperty("name")
@@ -58,7 +56,8 @@ public class DataSource implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("connectionString", connectionString).append("impersonationMode", impersonationMode).toString();
+        return new ToStringBuilder(this).append("name", name).append("connectionString", connectionString)
+                .append("impersonationMode", impersonationMode).toString();
     }
 
     @Override
@@ -75,7 +74,8 @@ public class DataSource implements Serializable {
             return false;
         }
         DataSource rhs = ((DataSource) other);
-        return new EqualsBuilder().append(name, rhs.name).append(connectionString, rhs.connectionString).append(impersonationMode, rhs.impersonationMode).isEquals();
+        return new EqualsBuilder().append(name, rhs.name).append(connectionString, rhs.connectionString)
+                .append(impersonationMode, rhs.impersonationMode).isEquals();
     }
 
 }

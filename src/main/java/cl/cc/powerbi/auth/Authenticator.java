@@ -1,17 +1,19 @@
 package cl.cc.powerbi.auth;
 
-import com.microsoft.aad.adal4j.AuthenticationContext;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import com.microsoft.aad.adal4j.AuthenticationContext;
+
 import org.springframework.util.StringUtils;
 
 /**
  *
  * @author CyberCastle, Based in code obtain from here:
- * https://github.com/satalyst/powerbi-rest-java/blob/master/src/main/java/com/satalyst/powerbi/impl/Office365Authenticator.java
+ *         https://github.com/satalyst/powerbi-rest-java/blob/master/src/main/java/com/satalyst/powerbi/impl/Office365Authenticator.java
  *
  */
 public class Authenticator {
@@ -34,7 +36,8 @@ public class Authenticator {
     private final ReadWriteLock tokenLock = new ReentrantReadWriteLock();
     private String cachedToken;
 
-    public Authenticator(String nativeClientId, String tenant, String username, String password, ExecutorService executor) {
+    public Authenticator(String nativeClientId, String tenant, String username, String password,
+            ExecutorService executor) {
         this.nativeClientId = nativeClientId;
         this.tenant = tenant;
         this.username = username;
@@ -67,7 +70,8 @@ public class Authenticator {
                     tokenLock.readLock().unlock();
                     tokenLock.writeLock().lock();
 
-                    // check again, it may have been set in the time it took us to acquire the write lock
+                    // check again, it may have been set in the time it took us to acquire the write
+                    // lock
                     if (cachedToken == null) {
                         cachedToken = getAccessToken();
                     }
@@ -79,13 +83,16 @@ public class Authenticator {
                 }
             }
         } finally {
-            // TODO: in theory, if there has been an exception in the authenticate method then this unlock method
-            // TODO: should fail as the downgrade of the lock was never performed. Haven't seen this issue in practice yet
-            // TODO: however it looks theoretically possible.
+            /*
+             * In theory, if there has been an exception in the authenticate method then
+             * this unlock method, should fail as the downgrade of the lock was never
+             * performed. Haven't seen this issue in practice yet however it looks
+             * theoretically possible.
+             */
             try {
                 tokenLock.readLock().unlock();
             } catch (IllegalMonitorStateException e) {
-                // ignore - see TODO above for reasoning....
+                // Ignore - see comment above for reasoning....
             }
         }
 
@@ -103,18 +110,12 @@ public class Authenticator {
 
     private String getAccessToken() throws AuthenticationException {
         try {
-            AuthenticationContext authenticationContext = new AuthenticationContext(
-                    DEFAULT_AUTHORITY + this.tenant,
-                    validateAuthority,
-                    executor
-            );
+            AuthenticationContext authenticationContext = new AuthenticationContext(DEFAULT_AUTHORITY + this.tenant,
+                    validateAuthority, executor);
 
-            String result
-                    = authenticationContext.acquireToken(DEFAULT_POWER_BI_RESOURCE_ID,
-                            nativeClientId,
-                            username,
-                            password, null
-                    ).get().getAccessToken();
+            String result = authenticationContext
+                    .acquireToken(DEFAULT_POWER_BI_RESOURCE_ID, nativeClientId, username, password, null).get()
+                    .getAccessToken();
 
             if (StringUtils.isEmpty(result)) {
                 throw new AuthenticationException("Returned access token is null.");

@@ -3,8 +3,10 @@ package cl.cc.powerbi.datamodel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,17 +15,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author CyberCastle
  */
-@JsonPropertyOrder({
-    "name",
-    "columns",
-    "partitions",
-    "annotations",
-    "isHidden",
-    "isPrivate",
-    "hierarchies",
-    "showAsVariationsOnly",
-    "measures"
-})
+@JsonPropertyOrder({ "name", "columns", "partitions", "annotations", "isHidden", "isPrivate", "hierarchies",
+        "showAsVariationsOnly", "measures" })
 public class Table implements Serializable {
 
     @JsonProperty("name")
@@ -138,12 +131,17 @@ public class Table implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("columns", columns).append("partitions", partitions).append("annotations", annotations).append("isHidden", isHidden).append("isPrivate", isPrivate).append("hierarchies", hierarchies).append("showAsVariationsOnly", showAsVariationsOnly).append("measures", measures).toString();
+        return new ToStringBuilder(this).append("name", name).append("columns", columns)
+                .append("partitions", partitions).append("annotations", annotations).append("isHidden", isHidden)
+                .append("isPrivate", isPrivate).append("hierarchies", hierarchies)
+                .append("showAsVariationsOnly", showAsVariationsOnly).append("measures", measures).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(partitions).append(measures).append(hierarchies).append(columns).append(name).append(annotations).append(isPrivate).append(showAsVariationsOnly).append(isHidden).toHashCode();
+        return new HashCodeBuilder().append(partitions).append(measures).append(hierarchies).append(columns)
+                .append(name).append(annotations).append(isPrivate).append(showAsVariationsOnly).append(isHidden)
+                .toHashCode();
     }
 
     @Override
@@ -155,7 +153,10 @@ public class Table implements Serializable {
             return false;
         }
         Table rhs = ((Table) other);
-        return new EqualsBuilder().append(partitions, rhs.partitions).append(measures, rhs.measures).append(hierarchies, rhs.hierarchies).append(columns, rhs.columns).append(name, rhs.name).append(annotations, rhs.annotations).append(isPrivate, rhs.isPrivate).append(showAsVariationsOnly, rhs.showAsVariationsOnly).append(isHidden, rhs.isHidden).isEquals();
+        return new EqualsBuilder().append(partitions, rhs.partitions).append(measures, rhs.measures)
+                .append(hierarchies, rhs.hierarchies).append(columns, rhs.columns).append(name, rhs.name)
+                .append(annotations, rhs.annotations).append(isPrivate, rhs.isPrivate)
+                .append(showAsVariationsOnly, rhs.showAsVariationsOnly).append(isHidden, rhs.isHidden).isEquals();
     }
 
 }

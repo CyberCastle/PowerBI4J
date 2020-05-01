@@ -3,8 +3,10 @@ package cl.cc.powerbi.datamodel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,13 +15,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author CyberCastle
  */
-@JsonPropertyOrder({
-    "culture",
-    "dataSources",
-    "tables",
-    "relationships",
-    "annotations"
-})
+@JsonPropertyOrder({ "culture", "dataSources", "tables", "relationships", "annotations" })
 public class Model implements Serializable {
 
     @JsonProperty("culture")
@@ -86,12 +82,15 @@ public class Model implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("culture", culture).append("dataSources", dataSources).append("tables", tables).append("relationships", relationships).append("annotations", annotations).toString();
+        return new ToStringBuilder(this).append("culture", culture).append("dataSources", dataSources)
+                .append("tables", tables).append("relationships", relationships).append("annotations", annotations)
+                .toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(relationships).append(annotations).append(tables).append(dataSources).append(culture).toHashCode();
+        return new HashCodeBuilder().append(relationships).append(annotations).append(tables).append(dataSources)
+                .append(culture).toHashCode();
     }
 
     @Override
@@ -103,7 +102,9 @@ public class Model implements Serializable {
             return false;
         }
         Model rhs = ((Model) other);
-        return new EqualsBuilder().append(relationships, rhs.relationships).append(annotations, rhs.annotations).append(tables, rhs.tables).append(dataSources, rhs.dataSources).append(culture, rhs.culture).isEquals();
+        return new EqualsBuilder().append(relationships, rhs.relationships).append(annotations, rhs.annotations)
+                .append(tables, rhs.tables).append(dataSources, rhs.dataSources).append(culture, rhs.culture)
+                .isEquals();
     }
 
 }

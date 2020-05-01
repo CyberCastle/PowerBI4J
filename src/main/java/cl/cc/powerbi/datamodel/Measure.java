@@ -3,8 +3,10 @@ package cl.cc.powerbi.datamodel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,13 +15,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author CyberCastle
  */
-@JsonPropertyOrder({
-    "name",
-    "expression",
-    "extendedProperties",
-    "annotations",
-    "formatString"
-})
+@JsonPropertyOrder({ "name", "expression", "extendedProperties", "annotations", "formatString" })
 public class Measure implements Serializable {
 
     @JsonProperty("name")
@@ -86,12 +82,15 @@ public class Measure implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("expression", expression).append("extendedProperties", extendedProperties).append("annotations", annotations).append("formatString", formatString).toString();
+        return new ToStringBuilder(this).append("name", name).append("expression", expression)
+                .append("extendedProperties", extendedProperties).append("annotations", annotations)
+                .append("formatString", formatString).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(formatString).append(annotations).append(extendedProperties).append(expression).toHashCode();
+        return new HashCodeBuilder().append(name).append(formatString).append(annotations).append(extendedProperties)
+                .append(expression).toHashCode();
     }
 
     @Override
@@ -103,7 +102,9 @@ public class Measure implements Serializable {
             return false;
         }
         Measure rhs = ((Measure) other);
-        return new EqualsBuilder().append(name, rhs.name).append(formatString, rhs.formatString).append(annotations, rhs.annotations).append(extendedProperties, rhs.extendedProperties).append(expression, rhs.expression).isEquals();
+        return new EqualsBuilder().append(name, rhs.name).append(formatString, rhs.formatString)
+                .append(annotations, rhs.annotations).append(extendedProperties, rhs.extendedProperties)
+                .append(expression, rhs.expression).isEquals();
     }
 
 }
