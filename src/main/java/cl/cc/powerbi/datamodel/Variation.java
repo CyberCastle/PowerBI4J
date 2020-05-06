@@ -1,18 +1,13 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "name", "relationship", "defaultHierarchy", "isDefault" })
 public class Variation implements Serializable {
 
@@ -68,14 +63,41 @@ public class Variation implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("relationship", relationship)
-                .append("defaultHierarchy", defaultHierarchy).append("isDefault", isDefault).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Variation.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("name");
+        sb.append('=');
+        sb.append(((this.name == null) ? "<null>" : this.name));
+        sb.append(',');
+        sb.append("relationship");
+        sb.append('=');
+        sb.append(((this.relationship == null) ? "<null>" : this.relationship));
+        sb.append(',');
+        sb.append("defaultHierarchy");
+        sb.append('=');
+        sb.append(((this.defaultHierarchy == null) ? "<null>" : this.defaultHierarchy));
+        sb.append(',');
+        sb.append("isDefault");
+        sb.append('=');
+        sb.append(((this.isDefault == null) ? "<null>" : this.isDefault));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(isDefault).append(defaultHierarchy).append(relationship)
-                .toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
+        result = ((result * 31) + ((this.isDefault == null) ? 0 : this.isDefault.hashCode()));
+        result = ((result * 31) + ((this.defaultHierarchy == null) ? 0 : this.defaultHierarchy.hashCode()));
+        result = ((result * 31) + ((this.relationship == null) ? 0 : this.relationship.hashCode()));
+        return result;
     }
 
     @Override
@@ -87,8 +109,13 @@ public class Variation implements Serializable {
             return false;
         }
         Variation rhs = ((Variation) other);
-        return new EqualsBuilder().append(name, rhs.name).append(isDefault, rhs.isDefault)
-                .append(defaultHierarchy, rhs.defaultHierarchy).append(relationship, rhs.relationship).isEquals();
+        return (((((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name)))
+                && ((this.isDefault == rhs.isDefault)
+                        || ((this.isDefault != null) && this.isDefault.equals(rhs.isDefault))))
+                && ((this.defaultHierarchy == rhs.defaultHierarchy)
+                        || ((this.defaultHierarchy != null) && this.defaultHierarchy.equals(rhs.defaultHierarchy))))
+                && ((this.relationship == rhs.relationship)
+                        || ((this.relationship != null) && this.relationship.equals(rhs.relationship))));
     }
 
 }

@@ -1,18 +1,13 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "name", "mode", "source" })
 public class Partition implements Serializable {
 
@@ -56,12 +51,36 @@ public class Partition implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("mode", mode).append("source", source).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Partition.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("name");
+        sb.append('=');
+        sb.append(((this.name == null) ? "<null>" : this.name));
+        sb.append(',');
+        sb.append("mode");
+        sb.append('=');
+        sb.append(((this.mode == null) ? "<null>" : this.mode));
+        sb.append(',');
+        sb.append("source");
+        sb.append('=');
+        sb.append(((this.source == null) ? "<null>" : this.source));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(mode).append(source).toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
+        result = ((result * 31) + ((this.mode == null) ? 0 : this.mode.hashCode()));
+        result = ((result * 31) + ((this.source == null) ? 0 : this.source.hashCode()));
+        return result;
     }
 
     @Override
@@ -73,7 +92,9 @@ public class Partition implements Serializable {
             return false;
         }
         Partition rhs = ((Partition) other);
-        return new EqualsBuilder().append(name, rhs.name).append(mode, rhs.mode).append(source, rhs.source).isEquals();
+        return ((((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name)))
+                && ((this.mode == rhs.mode) || ((this.mode != null) && this.mode.equals(rhs.mode))))
+                && ((this.source == rhs.source) || ((this.source != null) && this.source.equals(rhs.source))));
     }
 
 }

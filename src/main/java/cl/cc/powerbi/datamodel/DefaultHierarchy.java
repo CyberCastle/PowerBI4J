@@ -1,18 +1,13 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "table", "hierarchy" })
 public class DefaultHierarchy implements Serializable {
 
@@ -44,12 +39,31 @@ public class DefaultHierarchy implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("table", table).append("hierarchy", hierarchy).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(DefaultHierarchy.class.getName()).append('@')
+                .append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("table");
+        sb.append('=');
+        sb.append(((this.table == null) ? "<null>" : this.table));
+        sb.append(',');
+        sb.append("hierarchy");
+        sb.append('=');
+        sb.append(((this.hierarchy == null) ? "<null>" : this.hierarchy));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(table).append(hierarchy).toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.table == null) ? 0 : this.table.hashCode()));
+        result = ((result * 31) + ((this.hierarchy == null) ? 0 : this.hierarchy.hashCode()));
+        return result;
     }
 
     @Override
@@ -61,7 +75,9 @@ public class DefaultHierarchy implements Serializable {
             return false;
         }
         DefaultHierarchy rhs = ((DefaultHierarchy) other);
-        return new EqualsBuilder().append(table, rhs.table).append(hierarchy, rhs.hierarchy).isEquals();
+        return (((this.table == rhs.table) || ((this.table != null) && this.table.equals(rhs.table)))
+                && ((this.hierarchy == rhs.hierarchy)
+                        || ((this.hierarchy != null) && this.hierarchy.equals(rhs.hierarchy))));
     }
 
 }

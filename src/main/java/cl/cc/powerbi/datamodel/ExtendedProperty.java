@@ -1,18 +1,13 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "type", "name", "value" })
 public class ExtendedProperty implements Serializable {
 
@@ -56,12 +51,36 @@ public class ExtendedProperty implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("type", type).append("name", name).append("value", value).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(ExtendedProperty.class.getName()).append('@')
+                .append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("type");
+        sb.append('=');
+        sb.append(((this.type == null) ? "<null>" : this.type));
+        sb.append(',');
+        sb.append("name");
+        sb.append('=');
+        sb.append(((this.name == null) ? "<null>" : this.name));
+        sb.append(',');
+        sb.append("value");
+        sb.append('=');
+        sb.append(((this.value == null) ? "<null>" : this.value));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(type).append(value).toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
+        result = ((result * 31) + ((this.type == null) ? 0 : this.type.hashCode()));
+        result = ((result * 31) + ((this.value == null) ? 0 : this.value.hashCode()));
+        return result;
     }
 
     @Override
@@ -73,7 +92,9 @@ public class ExtendedProperty implements Serializable {
             return false;
         }
         ExtendedProperty rhs = ((ExtendedProperty) other);
-        return new EqualsBuilder().append(name, rhs.name).append(type, rhs.type).append(value, rhs.value).isEquals();
+        return ((((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name)))
+                && ((this.type == rhs.type) || ((this.type != null) && this.type.equals(rhs.type))))
+                && ((this.value == rhs.value) || ((this.value != null) && this.value.equals(rhs.value))));
     }
 
 }

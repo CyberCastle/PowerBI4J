@@ -1,18 +1,13 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "version", "daxTemplateName" })
 public class Value implements Serializable {
 
@@ -44,13 +39,31 @@ public class Value implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("version", version).append("daxTemplateName", daxTemplateName)
-                .toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Value.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("version");
+        sb.append('=');
+        sb.append(((this.version == null) ? "<null>" : this.version));
+        sb.append(',');
+        sb.append("daxTemplateName");
+        sb.append('=');
+        sb.append(((this.daxTemplateName == null) ? "<null>" : this.daxTemplateName));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(version).append(daxTemplateName).toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.version == null) ? 0 : this.version.hashCode()));
+        result = ((result * 31) + ((this.daxTemplateName == null) ? 0 : this.daxTemplateName.hashCode()));
+        return result;
     }
 
     @Override
@@ -62,7 +75,9 @@ public class Value implements Serializable {
             return false;
         }
         Value rhs = ((Value) other);
-        return new EqualsBuilder().append(version, rhs.version).append(daxTemplateName, rhs.daxTemplateName).isEquals();
+        return (((this.version == rhs.version) || ((this.version != null) && this.version.equals(rhs.version)))
+                && ((this.daxTemplateName == rhs.daxTemplateName)
+                        || ((this.daxTemplateName != null) && this.daxTemplateName.equals(rhs.daxTemplateName))));
     }
 
 }

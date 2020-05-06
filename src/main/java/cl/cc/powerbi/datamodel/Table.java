@@ -1,22 +1,18 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "name", "columns", "partitions", "annotations", "isHidden", "isPrivate", "hierarchies",
-        "showAsVariationsOnly", "measures" })
+        "showAsVariationsOnly", "measures", "excludeFromModelRefresh" })
 public class Table implements Serializable {
 
     @JsonProperty("name")
@@ -37,7 +33,9 @@ public class Table implements Serializable {
     private Boolean showAsVariationsOnly;
     @JsonProperty("measures")
     private List<Measure> measures = new ArrayList<Measure>();
-    private final static long serialVersionUID = 1005061397432380127L;
+    @JsonProperty("excludeFromModelRefresh")
+    private Boolean excludeFromModelRefresh;
+    private final static long serialVersionUID = 7964146338808055436L;
 
     @JsonProperty("name")
     public String getName() {
@@ -129,19 +127,84 @@ public class Table implements Serializable {
         this.measures = measures;
     }
 
+    @JsonProperty("excludeFromModelRefresh")
+    public Boolean getExcludeFromModelRefresh() {
+        return excludeFromModelRefresh;
+    }
+
+    @JsonProperty("excludeFromModelRefresh")
+    public void setExcludeFromModelRefresh(Boolean excludeFromModelRefresh) {
+        this.excludeFromModelRefresh = excludeFromModelRefresh;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("columns", columns)
-                .append("partitions", partitions).append("annotations", annotations).append("isHidden", isHidden)
-                .append("isPrivate", isPrivate).append("hierarchies", hierarchies)
-                .append("showAsVariationsOnly", showAsVariationsOnly).append("measures", measures).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Table.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("name");
+        sb.append('=');
+        sb.append(((this.name == null) ? "<null>" : this.name));
+        sb.append(',');
+        sb.append("columns");
+        sb.append('=');
+        sb.append(((this.columns == null) ? "<null>" : this.columns));
+        sb.append(',');
+        sb.append("partitions");
+        sb.append('=');
+        sb.append(((this.partitions == null) ? "<null>" : this.partitions));
+        sb.append(',');
+        sb.append("annotations");
+        sb.append('=');
+        sb.append(((this.annotations == null) ? "<null>" : this.annotations));
+        sb.append(',');
+        sb.append("isHidden");
+        sb.append('=');
+        sb.append(((this.isHidden == null) ? "<null>" : this.isHidden));
+        sb.append(',');
+        sb.append("isPrivate");
+        sb.append('=');
+        sb.append(((this.isPrivate == null) ? "<null>" : this.isPrivate));
+        sb.append(',');
+        sb.append("hierarchies");
+        sb.append('=');
+        sb.append(((this.hierarchies == null) ? "<null>" : this.hierarchies));
+        sb.append(',');
+        sb.append("showAsVariationsOnly");
+        sb.append('=');
+        sb.append(((this.showAsVariationsOnly == null) ? "<null>" : this.showAsVariationsOnly));
+        sb.append(',');
+        sb.append("measures");
+        sb.append('=');
+        sb.append(((this.measures == null) ? "<null>" : this.measures));
+        sb.append(',');
+        sb.append("excludeFromModelRefresh");
+        sb.append('=');
+        sb.append(((this.excludeFromModelRefresh == null) ? "<null>" : this.excludeFromModelRefresh));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(partitions).append(measures).append(hierarchies).append(columns)
-                .append(name).append(annotations).append(isPrivate).append(showAsVariationsOnly).append(isHidden)
-                .toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.partitions == null) ? 0 : this.partitions.hashCode()));
+        result = ((result * 31) + ((this.measures == null) ? 0 : this.measures.hashCode()));
+        result = ((result * 31) + ((this.hierarchies == null) ? 0 : this.hierarchies.hashCode()));
+        result = ((result * 31) + ((this.columns == null) ? 0 : this.columns.hashCode()));
+        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
+        result = ((result * 31) + ((this.annotations == null) ? 0 : this.annotations.hashCode()));
+        result = ((result * 31)
+                + ((this.excludeFromModelRefresh == null) ? 0 : this.excludeFromModelRefresh.hashCode()));
+        result = ((result * 31) + ((this.isPrivate == null) ? 0 : this.isPrivate.hashCode()));
+        result = ((result * 31) + ((this.showAsVariationsOnly == null) ? 0 : this.showAsVariationsOnly.hashCode()));
+        result = ((result * 31) + ((this.isHidden == null) ? 0 : this.isHidden.hashCode()));
+        return result;
     }
 
     @Override
@@ -153,10 +216,24 @@ public class Table implements Serializable {
             return false;
         }
         Table rhs = ((Table) other);
-        return new EqualsBuilder().append(partitions, rhs.partitions).append(measures, rhs.measures)
-                .append(hierarchies, rhs.hierarchies).append(columns, rhs.columns).append(name, rhs.name)
-                .append(annotations, rhs.annotations).append(isPrivate, rhs.isPrivate)
-                .append(showAsVariationsOnly, rhs.showAsVariationsOnly).append(isHidden, rhs.isHidden).isEquals();
+        return (((((((((((this.partitions == rhs.partitions)
+                || ((this.partitions != null) && this.partitions.equals(rhs.partitions)))
+                && ((this.measures == rhs.measures) || ((this.measures != null) && this.measures.equals(rhs.measures))))
+                && ((this.hierarchies == rhs.hierarchies)
+                        || ((this.hierarchies != null) && this.hierarchies.equals(rhs.hierarchies))))
+                && ((this.columns == rhs.columns) || ((this.columns != null) && this.columns.equals(rhs.columns))))
+                && ((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name))))
+                && ((this.annotations == rhs.annotations)
+                        || ((this.annotations != null) && this.annotations.equals(rhs.annotations))))
+                && ((this.excludeFromModelRefresh == rhs.excludeFromModelRefresh)
+                        || ((this.excludeFromModelRefresh != null)
+                                && this.excludeFromModelRefresh.equals(rhs.excludeFromModelRefresh))))
+                && ((this.isPrivate == rhs.isPrivate)
+                        || ((this.isPrivate != null) && this.isPrivate.equals(rhs.isPrivate))))
+                && ((this.showAsVariationsOnly == rhs.showAsVariationsOnly) || ((this.showAsVariationsOnly != null)
+                        && this.showAsVariationsOnly.equals(rhs.showAsVariationsOnly))))
+                && ((this.isHidden == rhs.isHidden)
+                        || ((this.isHidden != null) && this.isHidden.equals(rhs.isHidden))));
     }
 
 }

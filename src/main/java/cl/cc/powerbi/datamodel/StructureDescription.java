@@ -2,30 +2,32 @@ package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  *
  * @author CyberCastle
  * 
- *         Code generated with follow command: jsonschema2pojo -s
- *         StructureDescription.json -t targetFolder -a JACKSON2 -p
- *         cl.cc.powerbi.datamodel -sl -T JSON -tv 1.8 -c3
+ *         Code generated with follow command:
+ * 
+ *         jsonschema2pojo -s StructureDescription.json -t targetFolder -a
+ *         JACKSON2 -p cl.cc.powerbi.datamodel -sl -T JSON -tv 1.8 -c3
+ * 
+ *         jsonschema2pojo is obtained form here:
+ *         https://github.com/joelittlejohn/jsonschema2pojo
  * 
  *         Instructions to obtain the data model here:
  *         http://blogs.adatis.co.uk/simonwhiteley/post/PowerBI-Optimisation-P3-Extracting-and-Source-Controlling-PowerBI-Data-Models
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "create" })
 public class StructureDescription implements Serializable {
 
     @JsonProperty("create")
     private Create create;
-    private final static long serialVersionUID = 902245685706333983L;
+    private final static long serialVersionUID = 2944055645417398816L;
 
     @JsonProperty("create")
     public Create getCreate() {
@@ -39,12 +41,26 @@ public class StructureDescription implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("create", create).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(StructureDescription.class.getName()).append('@')
+                .append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("create");
+        sb.append('=');
+        sb.append(((this.create == null) ? "<null>" : this.create));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(create).toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.create == null) ? 0 : this.create.hashCode()));
+        return result;
     }
 
     @Override
@@ -56,7 +72,7 @@ public class StructureDescription implements Serializable {
             return false;
         }
         StructureDescription rhs = ((StructureDescription) other);
-        return new EqualsBuilder().append(create, rhs.create).isEquals();
+        return ((this.create == rhs.create) || ((this.create != null) && this.create.equals(rhs.create)));
     }
 
 }

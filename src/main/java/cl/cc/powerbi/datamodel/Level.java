@@ -1,18 +1,13 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "name", "ordinal", "column" })
 public class Level implements Serializable {
 
@@ -56,13 +51,36 @@ public class Level implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("ordinal", ordinal).append("column", column)
-                .toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Level.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("name");
+        sb.append('=');
+        sb.append(((this.name == null) ? "<null>" : this.name));
+        sb.append(',');
+        sb.append("ordinal");
+        sb.append('=');
+        sb.append(((this.ordinal == null) ? "<null>" : this.ordinal));
+        sb.append(',');
+        sb.append("column");
+        sb.append('=');
+        sb.append(((this.column == null) ? "<null>" : this.column));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(column).append(ordinal).toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
+        result = ((result * 31) + ((this.column == null) ? 0 : this.column.hashCode()));
+        result = ((result * 31) + ((this.ordinal == null) ? 0 : this.ordinal.hashCode()));
+        return result;
     }
 
     @Override
@@ -74,8 +92,9 @@ public class Level implements Serializable {
             return false;
         }
         Level rhs = ((Level) other);
-        return new EqualsBuilder().append(name, rhs.name).append(column, rhs.column).append(ordinal, rhs.ordinal)
-                .isEquals();
+        return ((((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name)))
+                && ((this.column == rhs.column) || ((this.column != null) && this.column.equals(rhs.column))))
+                && ((this.ordinal == rhs.ordinal) || ((this.ordinal != null) && this.ordinal.equals(rhs.ordinal))));
     }
 
 }

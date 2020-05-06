@@ -1,18 +1,13 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "database" })
 public class Create implements Serializable {
 
@@ -32,12 +27,26 @@ public class Create implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("database", database).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Create.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("database");
+        sb.append('=');
+        sb.append(((this.database == null) ? "<null>" : this.database));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(database).toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.database == null) ? 0 : this.database.hashCode()));
+        return result;
     }
 
     @Override
@@ -49,7 +58,7 @@ public class Create implements Serializable {
             return false;
         }
         Create rhs = ((Create) other);
-        return new EqualsBuilder().append(database, rhs.database).isEquals();
+        return ((this.database == rhs.database) || ((this.database != null) && this.database.equals(rhs.database)));
     }
 
 }

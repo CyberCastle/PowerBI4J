@@ -1,18 +1,13 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "name", "fromTable", "fromColumn", "toTable", "toColumn", "joinOnDateBehavior", "isActive",
         "crossFilteringBehavior", "fromCardinality" })
 public class Relationship implements Serializable {
@@ -129,18 +124,66 @@ public class Relationship implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("fromTable", fromTable)
-                .append("fromColumn", fromColumn).append("toTable", toTable).append("toColumn", toColumn)
-                .append("joinOnDateBehavior", joinOnDateBehavior).append("isActive", isActive)
-                .append("crossFilteringBehavior", crossFilteringBehavior).append("fromCardinality", fromCardinality)
-                .toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Relationship.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("name");
+        sb.append('=');
+        sb.append(((this.name == null) ? "<null>" : this.name));
+        sb.append(',');
+        sb.append("fromTable");
+        sb.append('=');
+        sb.append(((this.fromTable == null) ? "<null>" : this.fromTable));
+        sb.append(',');
+        sb.append("fromColumn");
+        sb.append('=');
+        sb.append(((this.fromColumn == null) ? "<null>" : this.fromColumn));
+        sb.append(',');
+        sb.append("toTable");
+        sb.append('=');
+        sb.append(((this.toTable == null) ? "<null>" : this.toTable));
+        sb.append(',');
+        sb.append("toColumn");
+        sb.append('=');
+        sb.append(((this.toColumn == null) ? "<null>" : this.toColumn));
+        sb.append(',');
+        sb.append("joinOnDateBehavior");
+        sb.append('=');
+        sb.append(((this.joinOnDateBehavior == null) ? "<null>" : this.joinOnDateBehavior));
+        sb.append(',');
+        sb.append("isActive");
+        sb.append('=');
+        sb.append(((this.isActive == null) ? "<null>" : this.isActive));
+        sb.append(',');
+        sb.append("crossFilteringBehavior");
+        sb.append('=');
+        sb.append(((this.crossFilteringBehavior == null) ? "<null>" : this.crossFilteringBehavior));
+        sb.append(',');
+        sb.append("fromCardinality");
+        sb.append('=');
+        sb.append(((this.fromCardinality == null) ? "<null>" : this.fromCardinality));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(crossFilteringBehavior).append(fromColumn).append(toTable)
-                .append(joinOnDateBehavior).append(fromCardinality).append(isActive).append(toColumn).append(fromTable)
-                .toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
+        result = ((result * 31) + ((this.crossFilteringBehavior == null) ? 0 : this.crossFilteringBehavior.hashCode()));
+        result = ((result * 31) + ((this.fromColumn == null) ? 0 : this.fromColumn.hashCode()));
+        result = ((result * 31) + ((this.toTable == null) ? 0 : this.toTable.hashCode()));
+        result = ((result * 31) + ((this.joinOnDateBehavior == null) ? 0 : this.joinOnDateBehavior.hashCode()));
+        result = ((result * 31) + ((this.fromCardinality == null) ? 0 : this.fromCardinality.hashCode()));
+        result = ((result * 31) + ((this.isActive == null) ? 0 : this.isActive.hashCode()));
+        result = ((result * 31) + ((this.toColumn == null) ? 0 : this.toColumn.hashCode()));
+        result = ((result * 31) + ((this.fromTable == null) ? 0 : this.fromTable.hashCode()));
+        return result;
     }
 
     @Override
@@ -152,11 +195,21 @@ public class Relationship implements Serializable {
             return false;
         }
         Relationship rhs = ((Relationship) other);
-        return new EqualsBuilder().append(name, rhs.name).append(crossFilteringBehavior, rhs.crossFilteringBehavior)
-                .append(fromColumn, rhs.fromColumn).append(toTable, rhs.toTable)
-                .append(joinOnDateBehavior, rhs.joinOnDateBehavior).append(fromCardinality, rhs.fromCardinality)
-                .append(isActive, rhs.isActive).append(toColumn, rhs.toColumn).append(fromTable, rhs.fromTable)
-                .isEquals();
+        return ((((((((((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name)))
+                && ((this.crossFilteringBehavior == rhs.crossFilteringBehavior)
+                        || ((this.crossFilteringBehavior != null)
+                                && this.crossFilteringBehavior.equals(rhs.crossFilteringBehavior))))
+                && ((this.fromColumn == rhs.fromColumn)
+                        || ((this.fromColumn != null) && this.fromColumn.equals(rhs.fromColumn))))
+                && ((this.toTable == rhs.toTable) || ((this.toTable != null) && this.toTable.equals(rhs.toTable))))
+                && ((this.joinOnDateBehavior == rhs.joinOnDateBehavior) || ((this.joinOnDateBehavior != null)
+                        && this.joinOnDateBehavior.equals(rhs.joinOnDateBehavior))))
+                && ((this.fromCardinality == rhs.fromCardinality)
+                        || ((this.fromCardinality != null) && this.fromCardinality.equals(rhs.fromCardinality))))
+                && ((this.isActive == rhs.isActive) || ((this.isActive != null) && this.isActive.equals(rhs.isActive))))
+                && ((this.toColumn == rhs.toColumn) || ((this.toColumn != null) && this.toColumn.equals(rhs.toColumn))))
+                && ((this.fromTable == rhs.fromTable)
+                        || ((this.fromTable != null) && this.fromTable.equals(rhs.fromTable))));
     }
 
 }

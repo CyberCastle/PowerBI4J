@@ -1,20 +1,18 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
-@JsonPropertyOrder({ "name", "value" })
-public class Annotation implements Serializable {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+    "name",
+    "value"
+})
+public class Annotation implements Serializable
+{
 
     @JsonProperty("name")
     private String name;
@@ -44,12 +42,30 @@ public class Annotation implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("value", value).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Annotation.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("name");
+        sb.append('=');
+        sb.append(((this.name == null)?"<null>":this.name));
+        sb.append(',');
+        sb.append("value");
+        sb.append('=');
+        sb.append(((this.value == null)?"<null>":this.value));
+        sb.append(',');
+        if (sb.charAt((sb.length()- 1)) == ',') {
+            sb.setCharAt((sb.length()- 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(value).toHashCode();
+        int result = 1;
+        result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
+        result = ((result* 31)+((this.value == null)? 0 :this.value.hashCode()));
+        return result;
     }
 
     @Override
@@ -61,7 +77,7 @@ public class Annotation implements Serializable {
             return false;
         }
         Annotation rhs = ((Annotation) other);
-        return new EqualsBuilder().append(name, rhs.name).append(value, rhs.value).isEquals();
+        return (((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.value == rhs.value)||((this.value!= null)&&this.value.equals(rhs.value))));
     }
 
 }

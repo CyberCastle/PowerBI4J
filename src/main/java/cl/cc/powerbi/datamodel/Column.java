@@ -1,23 +1,17 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
-@JsonPropertyOrder({ "name", "dataType", "sourceColumn", "formatString", "summarizeBy", "annotations", "type",
-        "isNameInferred", "isDataTypeInferred", "isHidden", "dataCategory", "expression", "sortByColumn",
-        "variations" })
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "name", "dataType", "sourceColumn", "summarizeBy", "annotations", "type", "isNameInferred",
+        "isDataTypeInferred", "isHidden", "dataCategory", "expression", "sortByColumn", "formatString", "variations" })
 public class Column implements Serializable {
 
     @JsonProperty("name")
@@ -26,8 +20,6 @@ public class Column implements Serializable {
     private String dataType;
     @JsonProperty("sourceColumn")
     private String sourceColumn;
-    @JsonProperty("formatString")
-    private String formatString;
     @JsonProperty("summarizeBy")
     private String summarizeBy;
     @JsonProperty("annotations")
@@ -46,6 +38,8 @@ public class Column implements Serializable {
     private String expression;
     @JsonProperty("sortByColumn")
     private String sortByColumn;
+    @JsonProperty("formatString")
+    private String formatString;
     @JsonProperty("variations")
     private List<Variation> variations = new ArrayList<Variation>();
     private final static long serialVersionUID = 2862615911768392886L;
@@ -78,16 +72,6 @@ public class Column implements Serializable {
     @JsonProperty("sourceColumn")
     public void setSourceColumn(String sourceColumn) {
         this.sourceColumn = sourceColumn;
-    }
-
-    @JsonProperty("formatString")
-    public String getFormatString() {
-        return formatString;
-    }
-
-    @JsonProperty("formatString")
-    public void setFormatString(String formatString) {
-        this.formatString = formatString;
     }
 
     @JsonProperty("summarizeBy")
@@ -180,6 +164,16 @@ public class Column implements Serializable {
         this.sortByColumn = sortByColumn;
     }
 
+    @JsonProperty("formatString")
+    public String getFormatString() {
+        return formatString;
+    }
+
+    @JsonProperty("formatString")
+    public void setFormatString(String formatString) {
+        this.formatString = formatString;
+    }
+
     @JsonProperty("variations")
     public List<Variation> getVariations() {
         return variations;
@@ -192,20 +186,91 @@ public class Column implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("dataType", dataType)
-                .append("sourceColumn", sourceColumn).append("formatString", formatString)
-                .append("summarizeBy", summarizeBy).append("annotations", annotations).append("type", type)
-                .append("isNameInferred", isNameInferred).append("isDataTypeInferred", isDataTypeInferred)
-                .append("isHidden", isHidden).append("dataCategory", dataCategory).append("expression", expression)
-                .append("sortByColumn", sortByColumn).append("variations", variations).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Column.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("name");
+        sb.append('=');
+        sb.append(((this.name == null) ? "<null>" : this.name));
+        sb.append(',');
+        sb.append("dataType");
+        sb.append('=');
+        sb.append(((this.dataType == null) ? "<null>" : this.dataType));
+        sb.append(',');
+        sb.append("sourceColumn");
+        sb.append('=');
+        sb.append(((this.sourceColumn == null) ? "<null>" : this.sourceColumn));
+        sb.append(',');
+        sb.append("summarizeBy");
+        sb.append('=');
+        sb.append(((this.summarizeBy == null) ? "<null>" : this.summarizeBy));
+        sb.append(',');
+        sb.append("annotations");
+        sb.append('=');
+        sb.append(((this.annotations == null) ? "<null>" : this.annotations));
+        sb.append(',');
+        sb.append("type");
+        sb.append('=');
+        sb.append(((this.type == null) ? "<null>" : this.type));
+        sb.append(',');
+        sb.append("isNameInferred");
+        sb.append('=');
+        sb.append(((this.isNameInferred == null) ? "<null>" : this.isNameInferred));
+        sb.append(',');
+        sb.append("isDataTypeInferred");
+        sb.append('=');
+        sb.append(((this.isDataTypeInferred == null) ? "<null>" : this.isDataTypeInferred));
+        sb.append(',');
+        sb.append("isHidden");
+        sb.append('=');
+        sb.append(((this.isHidden == null) ? "<null>" : this.isHidden));
+        sb.append(',');
+        sb.append("dataCategory");
+        sb.append('=');
+        sb.append(((this.dataCategory == null) ? "<null>" : this.dataCategory));
+        sb.append(',');
+        sb.append("expression");
+        sb.append('=');
+        sb.append(((this.expression == null) ? "<null>" : this.expression));
+        sb.append(',');
+        sb.append("sortByColumn");
+        sb.append('=');
+        sb.append(((this.sortByColumn == null) ? "<null>" : this.sortByColumn));
+        sb.append(',');
+        sb.append("formatString");
+        sb.append('=');
+        sb.append(((this.formatString == null) ? "<null>" : this.formatString));
+        sb.append(',');
+        sb.append("variations");
+        sb.append('=');
+        sb.append(((this.variations == null) ? "<null>" : this.variations));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(formatString).append(expression).append(dataType).append(annotations)
-                .append(type).append(summarizeBy).append(isNameInferred).append(isHidden).append(isDataTypeInferred)
-                .append(dataCategory).append(variations).append(name).append(sortByColumn).append(sourceColumn)
-                .toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.formatString == null) ? 0 : this.formatString.hashCode()));
+        result = ((result * 31) + ((this.expression == null) ? 0 : this.expression.hashCode()));
+        result = ((result * 31) + ((this.dataType == null) ? 0 : this.dataType.hashCode()));
+        result = ((result * 31) + ((this.annotations == null) ? 0 : this.annotations.hashCode()));
+        result = ((result * 31) + ((this.type == null) ? 0 : this.type.hashCode()));
+        result = ((result * 31) + ((this.summarizeBy == null) ? 0 : this.summarizeBy.hashCode()));
+        result = ((result * 31) + ((this.isNameInferred == null) ? 0 : this.isNameInferred.hashCode()));
+        result = ((result * 31) + ((this.isHidden == null) ? 0 : this.isHidden.hashCode()));
+        result = ((result * 31) + ((this.isDataTypeInferred == null) ? 0 : this.isDataTypeInferred.hashCode()));
+        result = ((result * 31) + ((this.dataCategory == null) ? 0 : this.dataCategory.hashCode()));
+        result = ((result * 31) + ((this.variations == null) ? 0 : this.variations.hashCode()));
+        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
+        result = ((result * 31) + ((this.sortByColumn == null) ? 0 : this.sortByColumn.hashCode()));
+        result = ((result * 31) + ((this.sourceColumn == null) ? 0 : this.sourceColumn.hashCode()));
+        return result;
     }
 
     @Override
@@ -217,12 +282,30 @@ public class Column implements Serializable {
             return false;
         }
         Column rhs = ((Column) other);
-        return new EqualsBuilder().append(formatString, rhs.formatString).append(expression, rhs.expression)
-                .append(dataType, rhs.dataType).append(annotations, rhs.annotations).append(type, rhs.type)
-                .append(summarizeBy, rhs.summarizeBy).append(isNameInferred, rhs.isNameInferred)
-                .append(isHidden, rhs.isHidden).append(isDataTypeInferred, rhs.isDataTypeInferred)
-                .append(dataCategory, rhs.dataCategory).append(variations, rhs.variations).append(name, rhs.name)
-                .append(sortByColumn, rhs.sortByColumn).append(sourceColumn, rhs.sourceColumn).isEquals();
+        return (((((((((((((((this.formatString == rhs.formatString)
+                || ((this.formatString != null) && this.formatString.equals(rhs.formatString)))
+                && ((this.expression == rhs.expression)
+                        || ((this.expression != null) && this.expression.equals(rhs.expression))))
+                && ((this.dataType == rhs.dataType) || ((this.dataType != null) && this.dataType.equals(rhs.dataType))))
+                && ((this.annotations == rhs.annotations)
+                        || ((this.annotations != null) && this.annotations.equals(rhs.annotations))))
+                && ((this.type == rhs.type) || ((this.type != null) && this.type.equals(rhs.type))))
+                && ((this.summarizeBy == rhs.summarizeBy)
+                        || ((this.summarizeBy != null) && this.summarizeBy.equals(rhs.summarizeBy))))
+                && ((this.isNameInferred == rhs.isNameInferred)
+                        || ((this.isNameInferred != null) && this.isNameInferred.equals(rhs.isNameInferred))))
+                && ((this.isHidden == rhs.isHidden) || ((this.isHidden != null) && this.isHidden.equals(rhs.isHidden))))
+                && ((this.isDataTypeInferred == rhs.isDataTypeInferred) || ((this.isDataTypeInferred != null)
+                        && this.isDataTypeInferred.equals(rhs.isDataTypeInferred))))
+                && ((this.dataCategory == rhs.dataCategory)
+                        || ((this.dataCategory != null) && this.dataCategory.equals(rhs.dataCategory))))
+                && ((this.variations == rhs.variations)
+                        || ((this.variations != null) && this.variations.equals(rhs.variations))))
+                && ((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name))))
+                && ((this.sortByColumn == rhs.sortByColumn)
+                        || ((this.sortByColumn != null) && this.sortByColumn.equals(rhs.sortByColumn))))
+                && ((this.sourceColumn == rhs.sourceColumn)
+                        || ((this.sourceColumn != null) && this.sourceColumn.equals(rhs.sourceColumn))));
     }
 
 }

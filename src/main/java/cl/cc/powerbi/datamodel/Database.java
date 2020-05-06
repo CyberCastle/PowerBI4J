@@ -1,18 +1,13 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "name", "compatibilityLevel", "model" })
 public class Database implements Serializable {
 
@@ -56,13 +51,36 @@ public class Database implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("compatibilityLevel", compatibilityLevel)
-                .append("model", model).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Database.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("name");
+        sb.append('=');
+        sb.append(((this.name == null) ? "<null>" : this.name));
+        sb.append(',');
+        sb.append("compatibilityLevel");
+        sb.append('=');
+        sb.append(((this.compatibilityLevel == null) ? "<null>" : this.compatibilityLevel));
+        sb.append(',');
+        sb.append("model");
+        sb.append('=');
+        sb.append(((this.model == null) ? "<null>" : this.model));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(model).append(compatibilityLevel).toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
+        result = ((result * 31) + ((this.model == null) ? 0 : this.model.hashCode()));
+        result = ((result * 31) + ((this.compatibilityLevel == null) ? 0 : this.compatibilityLevel.hashCode()));
+        return result;
     }
 
     @Override
@@ -74,8 +92,10 @@ public class Database implements Serializable {
             return false;
         }
         Database rhs = ((Database) other);
-        return new EqualsBuilder().append(name, rhs.name).append(model, rhs.model)
-                .append(compatibilityLevel, rhs.compatibilityLevel).isEquals();
+        return ((((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name)))
+                && ((this.model == rhs.model) || ((this.model != null) && this.model.equals(rhs.model))))
+                && ((this.compatibilityLevel == rhs.compatibilityLevel) || ((this.compatibilityLevel != null)
+                        && this.compatibilityLevel.equals(rhs.compatibilityLevel))));
     }
 
 }

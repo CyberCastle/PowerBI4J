@@ -1,50 +1,21 @@
+
 package cl.cc.powerbi.datamodel;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- *
- * @author CyberCastle
- */
-@JsonPropertyOrder({ "query", "dataSource", "type", "expression" })
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "type", "expression" })
 public class Source implements Serializable {
 
-    @JsonProperty("query")
-    private String query;
-    @JsonProperty("dataSource")
-    private String dataSource;
     @JsonProperty("type")
     private String type;
     @JsonProperty("expression")
     private String expression;
-    private final static long serialVersionUID = -2468489052980052128L;
-
-    @JsonProperty("query")
-    public String getQuery() {
-        return query;
-    }
-
-    @JsonProperty("query")
-    public void setQuery(String query) {
-        this.query = query;
-    }
-
-    @JsonProperty("dataSource")
-    public String getDataSource() {
-        return dataSource;
-    }
-
-    @JsonProperty("dataSource")
-    public void setDataSource(String dataSource) {
-        this.dataSource = dataSource;
-    }
+    private final static long serialVersionUID = -304310875974551088L;
 
     @JsonProperty("type")
     public String getType() {
@@ -68,13 +39,31 @@ public class Source implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("query", query).append("dataSource", dataSource).append("type", type)
-                .append("expression", expression).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Source.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+                .append('[');
+        sb.append("type");
+        sb.append('=');
+        sb.append(((this.type == null) ? "<null>" : this.type));
+        sb.append(',');
+        sb.append("expression");
+        sb.append('=');
+        sb.append(((this.expression == null) ? "<null>" : this.expression));
+        sb.append(',');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(expression).append(type).append(dataSource).append(query).toHashCode();
+        int result = 1;
+        result = ((result * 31) + ((this.type == null) ? 0 : this.type.hashCode()));
+        result = ((result * 31) + ((this.expression == null) ? 0 : this.expression.hashCode()));
+        return result;
     }
 
     @Override
@@ -86,8 +75,9 @@ public class Source implements Serializable {
             return false;
         }
         Source rhs = ((Source) other);
-        return new EqualsBuilder().append(expression, rhs.expression).append(type, rhs.type)
-                .append(dataSource, rhs.dataSource).append(query, rhs.query).isEquals();
+        return (((this.type == rhs.type) || ((this.type != null) && this.type.equals(rhs.type)))
+                && ((this.expression == rhs.expression)
+                        || ((this.expression != null) && this.expression.equals(rhs.expression))));
     }
 
 }
