@@ -1,5 +1,5 @@
 
-package cl.cc.powerbi.datamodel;
+package cl.cc.powerbi.pbix.model;
 
 import java.io.Serializable;
 
@@ -8,16 +8,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "name", "mode", "source" })
-public class Partition implements Serializable {
+@JsonPropertyOrder({ "name", "ordinal", "column" })
+public class Level implements Serializable {
 
     @JsonProperty("name")
     private String name;
-    @JsonProperty("mode")
-    private String mode;
-    @JsonProperty("source")
-    private Source source;
-    private final static long serialVersionUID = -1226871325606304544L;
+    @JsonProperty("ordinal")
+    private Integer ordinal;
+    @JsonProperty("column")
+    private String column;
+    private final static long serialVersionUID = 1065460579303325801L;
 
     @JsonProperty("name")
     public String getName() {
@@ -29,42 +29,42 @@ public class Partition implements Serializable {
         this.name = name;
     }
 
-    @JsonProperty("mode")
-    public String getMode() {
-        return mode;
+    @JsonProperty("ordinal")
+    public Integer getOrdinal() {
+        return ordinal;
     }
 
-    @JsonProperty("mode")
-    public void setMode(String mode) {
-        this.mode = mode;
+    @JsonProperty("ordinal")
+    public void setOrdinal(Integer ordinal) {
+        this.ordinal = ordinal;
     }
 
-    @JsonProperty("source")
-    public Source getSource() {
-        return source;
+    @JsonProperty("column")
+    public String getColumn() {
+        return column;
     }
 
-    @JsonProperty("source")
-    public void setSource(Source source) {
-        this.source = source;
+    @JsonProperty("column")
+    public void setColumn(String column) {
+        this.column = column;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Partition.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+        sb.append(Level.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
                 .append('[');
         sb.append("name");
         sb.append('=');
         sb.append(((this.name == null) ? "<null>" : this.name));
         sb.append(',');
-        sb.append("mode");
+        sb.append("ordinal");
         sb.append('=');
-        sb.append(((this.mode == null) ? "<null>" : this.mode));
+        sb.append(((this.ordinal == null) ? "<null>" : this.ordinal));
         sb.append(',');
-        sb.append("source");
+        sb.append("column");
         sb.append('=');
-        sb.append(((this.source == null) ? "<null>" : this.source));
+        sb.append(((this.column == null) ? "<null>" : this.column));
         sb.append(',');
         if (sb.charAt((sb.length() - 1)) == ',') {
             sb.setCharAt((sb.length() - 1), ']');
@@ -78,8 +78,8 @@ public class Partition implements Serializable {
     public int hashCode() {
         int result = 1;
         result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
-        result = ((result * 31) + ((this.mode == null) ? 0 : this.mode.hashCode()));
-        result = ((result * 31) + ((this.source == null) ? 0 : this.source.hashCode()));
+        result = ((result * 31) + ((this.column == null) ? 0 : this.column.hashCode()));
+        result = ((result * 31) + ((this.ordinal == null) ? 0 : this.ordinal.hashCode()));
         return result;
     }
 
@@ -88,13 +88,13 @@ public class Partition implements Serializable {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Partition) == false) {
+        if ((other instanceof Level) == false) {
             return false;
         }
-        Partition rhs = ((Partition) other);
+        Level rhs = ((Level) other);
         return ((((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name)))
-                && ((this.mode == rhs.mode) || ((this.mode != null) && this.mode.equals(rhs.mode))))
-                && ((this.source == rhs.source) || ((this.source != null) && this.source.equals(rhs.source))));
+                && ((this.column == rhs.column) || ((this.column != null) && this.column.equals(rhs.column))))
+                && ((this.ordinal == rhs.ordinal) || ((this.ordinal != null) && this.ordinal.equals(rhs.ordinal))));
     }
 
 }

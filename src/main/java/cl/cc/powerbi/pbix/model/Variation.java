@@ -1,5 +1,5 @@
 
-package cl.cc.powerbi.datamodel;
+package cl.cc.powerbi.pbix.model;
 
 import java.io.Serializable;
 

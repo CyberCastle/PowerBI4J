@@ -1,5 +1,5 @@
 
-package cl.cc.powerbi.datamodel;
+package cl.cc.powerbi.pbix.model;
 
 import java.io.Serializable;
 
@@ -8,14 +8,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "name", "linguisticMetadata" })
-public class Culture implements Serializable {
+@JsonPropertyOrder({ "name", "value" })
+public class Annotation implements Serializable {
 
     @JsonProperty("name")
     private String name;
-    @JsonProperty("linguisticMetadata")
-    private LinguisticMetadata linguisticMetadata;
-    private final static long serialVersionUID = 1258032343278945091L;
+    @JsonProperty("value")
+    private String value;
+    private final static long serialVersionUID = -4457366836875404472L;
 
     @JsonProperty("name")
     public String getName() {
@@ -27,28 +27,28 @@ public class Culture implements Serializable {
         this.name = name;
     }
 
-    @JsonProperty("linguisticMetadata")
-    public LinguisticMetadata getLinguisticMetadata() {
-        return linguisticMetadata;
+    @JsonProperty("value")
+    public String getValue() {
+        return value;
     }
 
-    @JsonProperty("linguisticMetadata")
-    public void setLinguisticMetadata(LinguisticMetadata linguisticMetadata) {
-        this.linguisticMetadata = linguisticMetadata;
+    @JsonProperty("value")
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Culture.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
+        sb.append(Annotation.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
                 .append('[');
         sb.append("name");
         sb.append('=');
         sb.append(((this.name == null) ? "<null>" : this.name));
         sb.append(',');
-        sb.append("linguisticMetadata");
+        sb.append("value");
         sb.append('=');
-        sb.append(((this.linguisticMetadata == null) ? "<null>" : this.linguisticMetadata));
+        sb.append(((this.value == null) ? "<null>" : this.value));
         sb.append(',');
         if (sb.charAt((sb.length() - 1)) == ',') {
             sb.setCharAt((sb.length() - 1), ']');
@@ -62,7 +62,7 @@ public class Culture implements Serializable {
     public int hashCode() {
         int result = 1;
         result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
-        result = ((result * 31) + ((this.linguisticMetadata == null) ? 0 : this.linguisticMetadata.hashCode()));
+        result = ((result * 31) + ((this.value == null) ? 0 : this.value.hashCode()));
         return result;
     }
 
@@ -71,13 +71,12 @@ public class Culture implements Serializable {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Culture) == false) {
+        if ((other instanceof Annotation) == false) {
             return false;
         }
-        Culture rhs = ((Culture) other);
+        Annotation rhs = ((Annotation) other);
         return (((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name)))
-                && ((this.linguisticMetadata == rhs.linguisticMetadata) || ((this.linguisticMetadata != null)
-                        && this.linguisticMetadata.equals(rhs.linguisticMetadata))));
+                && ((this.value == rhs.value) || ((this.value != null) && this.value.equals(rhs.value))));
     }
 
 }

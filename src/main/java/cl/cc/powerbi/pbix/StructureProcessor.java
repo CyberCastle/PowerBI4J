@@ -1,4 +1,4 @@
-package cl.cc.powerbi.loadmodel;
+package cl.cc.powerbi.pbix;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +14,9 @@ import org.slf4j.LoggerFactory;
 
 import cl.cc.powerbi.client.model.Column;
 import cl.cc.powerbi.client.model.Dataset;
-import cl.cc.powerbi.datamodel.Relationship;
-import cl.cc.powerbi.datamodel.StructureDescription;
-import cl.cc.powerbi.datamodel.Table;
+import cl.cc.powerbi.pbix.model.Relationship;
+import cl.cc.powerbi.pbix.model.StructureDescription;
+import cl.cc.powerbi.pbix.model.Table;
 
 /**
  *

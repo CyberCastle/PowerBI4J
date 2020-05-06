@@ -1,4 +1,4 @@
-package cl.cc.powerbi.loadmodel;
+package cl.cc.powerbi.pbix;
 
 /**
  * @author CyberCastle
