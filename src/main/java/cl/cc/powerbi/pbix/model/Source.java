@@ -2,7 +2,10 @@
 package cl.cc.powerbi.pbix.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -14,7 +17,8 @@ public class Source implements Serializable {
     @JsonProperty("type")
     private String type;
     @JsonProperty("expression")
-    private String expression;
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    private List<String> expression = new ArrayList<String>();
     private final static long serialVersionUID = -304310875974551088L;
 
     @JsonProperty("type")
@@ -28,12 +32,13 @@ public class Source implements Serializable {
     }
 
     @JsonProperty("expression")
-    public String getExpression() {
+    public List<String> getExpression() {
         return expression;
     }
 
     @JsonProperty("expression")
-    public void setExpression(String expression) {
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    public void setExpression(List<String> expression) {
         this.expression = expression;
     }
 
