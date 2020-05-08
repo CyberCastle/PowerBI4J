@@ -163,7 +163,7 @@ public class CreateDatasetRequest {
     @javax.annotation.Nullable
     @ApiModelProperty(value = "The dataset relationships.")
     @JsonProperty(JSON_PROPERTY_RELATIONSHIPS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
 
     public List<Relationship> getRelationships() {
         return relationships;
@@ -195,7 +195,7 @@ public class CreateDatasetRequest {
     @javax.annotation.Nullable
     @ApiModelProperty(value = "The datasources associated with this dataset.")
     @JsonProperty(JSON_PROPERTY_DATASOURCES)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
 
     public List<Datasource> getDatasources() {
         return datasources;

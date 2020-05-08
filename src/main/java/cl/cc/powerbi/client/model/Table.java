@@ -116,7 +116,7 @@ public class Table {
     @javax.annotation.Nullable
     @ApiModelProperty(value = "The data rows within this table")
     @JsonProperty(JSON_PROPERTY_ROWS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
 
     public List<Row> getRows() {
         return rows;
@@ -148,7 +148,7 @@ public class Table {
     @javax.annotation.Nullable
     @ApiModelProperty(value = "The measures within this table")
     @JsonProperty(JSON_PROPERTY_MEASURES)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
 
     public List<Measure> getMeasures() {
         return measures;

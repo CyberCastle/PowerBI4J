@@ -63,8 +63,10 @@ public class Relationship {
 
         @JsonCreator
         public static CrossFilteringBehaviorEnum fromValue(String value) {
+            if (value == null)
+                return CrossFilteringBehaviorEnum.ONEDIRECTION;
             for (CrossFilteringBehaviorEnum b : CrossFilteringBehaviorEnum.values()) {
-                if (b.value.equals(value)) {
+                if (b.value.equalsIgnoreCase(value)) {
                     return b;
                 }
             }
