@@ -26,6 +26,8 @@ import com.fasterxml.jackson.databind.util.StdDateFormat;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -44,6 +46,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -55,6 +58,9 @@ import cl.cc.powerbi.client.invoker.auth.HttpBearerAuth;
 
 @Component("cl.cc.powerbi.client.invoker.ApiClient")
 public class ApiClient {
+
+    private static Logger log = LoggerFactory.getLogger(ApiClient.class);
+
     public enum CollectionFormat {
         CSV(","), TSV("\t"), SSV(" "), PIPES("|"), MULTI(null);
 
@@ -596,16 +602,14 @@ public class ApiClient {
         addCookiesToRequest(defaultCookies, requestBuilder);
 
         RequestEntity<Object> requestEntity = requestBuilder.body(selectBody(body, formParams, contentType));
+        try {
+            return restTemplate.exchange(requestEntity, returnType);
+        } catch (HttpStatusCodeException e) {
 
-        ResponseEntity<T> responseEntity = restTemplate.exchange(requestEntity, returnType);
+            log.error(String.format("API returned %d code error, with message: %s", e.getRawStatusCode(),
+                    e.getResponseBodyAsString()));
 
-        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            return responseEntity;
-        } else {
-            // The error handler built into the RestTemplate should handle 400 and 500
-            // series errors.
-            throw new RestClientException("API returned " + responseEntity.getStatusCode()
-                    + " and it wasn't handled by the RestTemplate error handler");
+            throw new RestClientException("API returned with error.", e);
         }
     }
 
