@@ -2,6 +2,7 @@ package cl.cc.powerbi.pbix;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cl.cc.powerbi.client.model.Column;
-import cl.cc.powerbi.client.model.Dataset;
+import cl.cc.powerbi.client.model.CreateDatasetRequest;
+import cl.cc.powerbi.client.model.CreateDatasetRequest.DefaultModeEnum;
 import cl.cc.powerbi.pbix.model.Relationship;
 import cl.cc.powerbi.pbix.model.StructureDescription;
 import cl.cc.powerbi.pbix.model.Table;
@@ -27,6 +29,8 @@ public class StructureProcessor {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final String structureDescriptionFilePath;
+    private final List<String> hiddenTables = new ArrayList<>();
+
     private StructureDescription structure;
 
     public StructureProcessor(String structureDescriptionFilePath) {
@@ -43,18 +47,20 @@ public class StructureProcessor {
         }
     }
 
-    public Dataset generateDataset(String name) {
-        Dataset dataset = new Dataset();
+    public CreateDatasetRequest createDatasetRequest(String name) {
+        CreateDatasetRequest dataset = new CreateDatasetRequest();
         dataset.setName(name);
         this.addTablesToDataset(dataset);
         this.addRelationshipsToDataset(dataset);
+        dataset.defaultMode(DefaultModeEnum.PUSH);
         return dataset;
     }
 
-    public void addTablesToDataset(Dataset dataset) {
+    public void addTablesToDataset(CreateDatasetRequest dataset) {
         List<Table> tablesSource = this.structure.getCreate().getDatabase().getModel().getTables();
 
         tablesSource.forEach((tableSource) -> {
+
             // We only list the visible tables, these will be created in Power BI Service
             if (tableSource.getIsHidden() == null || tableSource.getIsHidden() == false) {
                 log.debug(String.format("Processing table %s.", tableSource.getName()));
@@ -65,31 +71,40 @@ public class StructureProcessor {
                 if (tableSource.getMeasures() != null && !tableSource.getMeasures().isEmpty()) {
                     tableTarget.setMeasures(this.copyMeasures(tableSource));
                 }
-                // TODO post update: FIX
-                // dataset.addTablesItem(tableTarget);
-                // dataset.se
+
+                dataset.addTablesItem(tableTarget);
+            } else {
+                hiddenTables.add(tableSource.getName());
             }
         });
     }
 
-    public void addRelationshipsToDataset(Dataset dataset) {
+    public void addRelationshipsToDataset(CreateDatasetRequest dataset) {
         List<Relationship> relationshipsSource = this.structure.getCreate().getDatabase().getModel().getRelationships();
 
         relationshipsSource.forEach((relationshipSource) -> {
             log.debug(String.format("Processing relationship %s.", relationshipSource.getName()));
-            cl.cc.powerbi.client.model.Relationship relationshipTarget = new cl.cc.powerbi.client.model.Relationship();
-            relationshipTarget.setName(relationshipSource.getName());
 
-            relationshipTarget.crossFilteringBehavior(cl.cc.powerbi.client.model.Relationship.CrossFilteringBehaviorEnum
-                    .fromValue(relationshipSource.getCrossFilteringBehavior()));
+            // We only list the active relationships, these will be created in Power BI
+            // Service
+            if (relationshipSource.getIsActive() == null || relationshipSource.getIsActive() == true) {
 
-            // TODO post update: FIX
-            /*
-             * .setReferences(relationshipSource.getFromTable(),
-             * relationshipSource.getFromColumn(), relationshipSource.getToTable(),
-             * relationshipSource.getToColumn());
-             */
+                cl.cc.powerbi.client.model.Relationship relationshipTarget = new cl.cc.powerbi.client.model.Relationship();
+                relationshipTarget.setName(relationshipSource.getName());
 
+                // Relationship with hidden tables references are ignored.
+                if (!hiddenTables.contains(relationshipSource.getFromTable())
+                        && !hiddenTables.contains(relationshipSource.getToTable())) {
+
+                    relationshipTarget
+                            .crossFilteringBehavior(cl.cc.powerbi.client.model.Relationship.CrossFilteringBehaviorEnum
+                                    .fromValue(relationshipSource.getCrossFilteringBehavior()))
+                            .fromTable(relationshipSource.getFromTable()).fromColumn(relationshipSource.getFromColumn())
+                            .toTable(relationshipSource.getToTable()).toColumn(relationshipSource.getToColumn());
+
+                    dataset.addRelationshipsItem(relationshipTarget);
+                }
+            }
         });
     }
 
